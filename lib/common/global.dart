@@ -10,7 +10,6 @@ import '../models/vpn_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fy_vpn_sdk/fy_vpn_sdk.dart';
-import 'package:device_info/device_info.dart';
 
 enum DeviceType { android, iOS, windows, macOS, linux, error }
 
@@ -32,6 +31,8 @@ class Global {
   static const String _citiesKey = 'CITIES';
   static const String _baseUrlKey = 'BASE_URL';
   static const String _deviceKey = 'DEVICE';
+
+  final FyVpnSdk _sdk = FyVpnSdk();
 
   //TODO fixed on publish
   static String defaultApiBaseUrl = 'http://192.168.50.66:8080';
@@ -72,7 +73,7 @@ class Global {
 
   fy_state _state = fy_state.NONE;
   Future<fy_state> get vpnState async {
-    _state = await FyVpnSdk.state;
+    _state = await _sdk.state;
     return _state;
   }
 
@@ -98,20 +99,16 @@ class Global {
       String deviceStr = (_prefs.getString(_deviceKey))!;
       _device = jsonDecode(deviceStr);
     } else {
-      final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
       try {
+        String deviceId = await _sdk.deviceId;
+
         if (Platform.isAndroid) {
-          AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
           _device = {
-            'deviceId': androidInfo.androidId,
+            'deviceId': deviceId,
             'platform': DeviceType.android.index
           };
         } else if (Platform.isIOS) {
-          IosDeviceInfo iosInfo = await deviceInfoPlugin.iosInfo;
-          _device = {
-            'deviceId': iosInfo.identifierForVendor,
-            'platform': DeviceType.iOS.index
-          };
+          _device = {'deviceId': deviceId, 'platform': DeviceType.iOS.index};
         } else if (Platform.isWindows) {
           _device = {
             'deviceId': getRandomString(24),

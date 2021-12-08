@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:provider/provider.dart';
 import 'package:vpn/api/api_models.dart';
 import 'package:vpn/models/vpn_model.dart';
@@ -65,16 +67,60 @@ class _HomePageState extends State<HomePage> {
         }));
       }
     });
+
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      VpnModel vpnModel = Provider.of<VpnModel>(context, listen: false);
+
+      debugPrint('state subscription!');
+      _stateSubscription = vpnModel.onStateChanged.listen((event) {
+        setState(() {
+          debugPrint('state change : $event');
+          _state = event;
+        });
+      });
+
+      debugPrint('error subscription!');
+      _errorSubscription = vpnModel.onError.listen((event) {
+        String message;
+        debugPrint('error : $event');
+        switch (event) {
+          case fy_error.fy_err_auth_deny:
+            message = S.of(context).invalid_exchange_code;
+            break;
+          case fy_error.fy_err_connection:
+            message = S.of(context).connection_error;
+            break;
+          default:
+            message = S.of(context).unknown_error;
+            break;
+        }
+
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(message),
+          duration: const Duration(seconds: 3),
+        ));
+      });
+
+      vpnModel.getState().then((value) => _state = value);
+    });
   }
+
+  fy_state? _state;
+  StreamSubscription<fy_error>? _errorSubscription;
+  StreamSubscription<fy_state>? _stateSubscription;
 
   @override
   void deactivate() {
     super.deactivate();
+    _errorSubscription!.cancel();
+    _stateSubscription!.cancel();
   }
 
-  Widget getStateIcon(VpnModel vpnModel) {
+  Widget getStateIcon() {
     Color? color;
-    switch (vpnModel.state) {
+    switch (_state) {
       case fy_state.AUTHENTICATING:
       case fy_state.CONFIGURING:
       case fy_state.CONNECTING:
@@ -97,10 +143,10 @@ class _HomePageState extends State<HomePage> {
     return Icon(Icons.power_settings_new, color: color);
   }
 
-  Widget getStateText(VpnModel vpnModel) {
+  Widget getStateText() {
     String text = '';
 
-    switch (vpnModel.state) {
+    switch (_state) {
       case fy_state.AUTHENTICATING:
         text = S.of(context).authenticating;
         break;
@@ -286,13 +332,13 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                   // icon: const Icon(Icons.power_settings_new, color: Colors.white),
-                  icon: getStateIcon(vpnModel),
+                  icon: getStateIcon(),
                   iconSize: 128,
                 ),
                 const SizedBox(
                   height: 25,
                 ),
-                getStateText(vpnModel),
+                getStateText(),
               ],
             ),
             Builder(

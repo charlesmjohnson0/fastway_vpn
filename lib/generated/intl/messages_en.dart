@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "chinese": MessageLookupByLibrary.simpleMessage("中文"),
         "configuring": MessageLookupByLibrary.simpleMessage("Configuring ..."),
         "connecting": MessageLookupByLibrary.simpleMessage("Connecting ..."),
+        "connection_error":
+            MessageLookupByLibrary.simpleMessage("Connection error!"),
         "connection_mode":
             MessageLookupByLibrary.simpleMessage("Connection Mode"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
@@ -64,6 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ikev2_ipsec": MessageLookupByLibrary.simpleMessage("IKEv2(IPSec)"),
         "ikev2_ipsec_description": MessageLookupByLibrary.simpleMessage(
             "Auto-reconnect\\Strong encryption\\Stability and Speed VPN protocol"),
+        "invalid_exchange_code":
+            MessageLookupByLibrary.simpleMessage("Invalid exchange code!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lightway_tcp": MessageLookupByLibrary.simpleMessage("Lightway Tcp"),
         "lightway_tcp_description": MessageLookupByLibrary.simpleMessage(
@@ -96,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unbindding": MessageLookupByLibrary.simpleMessage("Unbindding..."),
         "unbinding_failed":
             MessageLookupByLibrary.simpleMessage("Unbinding failed!"),
+        "unknown_error": MessageLookupByLibrary.simpleMessage("Unknow error!"),
         "verification_failed":
             MessageLookupByLibrary.simpleMessage("Verification failed!"),
         "verified_successfully":

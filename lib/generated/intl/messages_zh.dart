@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chinese": MessageLookupByLibrary.simpleMessage("中文"),
         "configuring": MessageLookupByLibrary.simpleMessage("配置中..."),
         "connecting": MessageLookupByLibrary.simpleMessage("连接中..."),
+        "connection_error": MessageLookupByLibrary.simpleMessage("连接错误!"),
         "connection_mode": MessageLookupByLibrary.simpleMessage("连接模式"),
         "copied": MessageLookupByLibrary.simpleMessage("已复制"),
         "copy": MessageLookupByLibrary.simpleMessage("复制"),
@@ -58,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ikev2_ipsec": MessageLookupByLibrary.simpleMessage("IKEv2(IPSec)"),
         "ikev2_ipsec_description":
             MessageLookupByLibrary.simpleMessage("自动重连、强加密、稳定和快速的VPN协议"),
+        "invalid_exchange_code":
+            MessageLookupByLibrary.simpleMessage("无效的兑换码!"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "lightway_tcp": MessageLookupByLibrary.simpleMessage("Lightway Tcp"),
         "lightway_tcp_description":
@@ -84,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unbind_successfully": MessageLookupByLibrary.simpleMessage("解绑成功!"),
         "unbindding": MessageLookupByLibrary.simpleMessage("解绑中..."),
         "unbinding_failed": MessageLookupByLibrary.simpleMessage("解绑失败!"),
+        "unknown_error": MessageLookupByLibrary.simpleMessage("未知错误!"),
         "verification_failed": MessageLookupByLibrary.simpleMessage("验证失败!"),
         "verified_successfully": MessageLookupByLibrary.simpleMessage("验证成功!"),
         "verifying": MessageLookupByLibrary.simpleMessage("验证中..."),

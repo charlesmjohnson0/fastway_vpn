@@ -590,6 +590,36 @@ class S {
     );
   }
 
+  /// `Invalid exchange code!`
+  String get invalid_exchange_code {
+    return Intl.message(
+      'Invalid exchange code!',
+      name: 'invalid_exchange_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connection error!`
+  String get connection_error {
+    return Intl.message(
+      'Connection error!',
+      name: 'connection_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknow error!`
+  String get unknown_error {
+    return Intl.message(
+      'Unknow error!',
+      name: 'unknown_error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Devices`
   String get devices {
     return Intl.message(

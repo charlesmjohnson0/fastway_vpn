@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fy_vpn_sdk/fy_vpn_sdk.dart';
 
 import '/api/api_models.dart';
@@ -13,18 +15,21 @@ enum VpnProtocol {
 }
 
 class VpnModel extends ChangeNotifier {
+  final FyVpnSdk _sdk = FyVpnSdk();
+  VpnModel() {}
+
   final Global global = Global();
 
   fy_state _state = fy_state.NONE;
 
-  fy_state get state => _state;
-
-  VpnModel() {
-    FyVpnSdk.onStateChanged.listen((event) {
-      _state = event;
-      notifyListeners();
-    });
+  Future<fy_state> getState() async {
+    _state = await _sdk.state;
+    return _state;
   }
+
+  Stream<fy_state> get onStateChanged => _sdk.onStateChanged;
+
+  Stream<fy_error> get onError => _sdk.onError;
 
   VpnProtocol get protocol => global.protocol;
 
@@ -37,7 +42,7 @@ class VpnModel extends ChangeNotifier {
   }
 
   Future<void> toggle() async {
-    _state = await FyVpnSdk.state;
+    _state = await getState();
 
     switch (_state) {
       case fy_state.AUTHENTICATING:
@@ -50,19 +55,19 @@ class VpnModel extends ChangeNotifier {
         await connect();
     }
 
-    _state = await FyVpnSdk.state;
+    _state = await _sdk.state;
 
     notifyListeners();
   }
 
   Future<void> connect() async {
-    bool prepared = await FyVpnSdk.prepare();
+    bool prepared = await _sdk.prepare();
 
     if (!prepared) {
       return;
     }
 
-    prepared = await FyVpnSdk.prepared();
+    prepared = await _sdk.prepared();
 
     if (!prepared) {
       return;
@@ -98,12 +103,18 @@ class VpnModel extends ChangeNotifier {
           break;
       }
 
-      FyVpnSdk.startVpnService(protocolStr, node.domain ?? node.publicIP, port,
+      debugPrint('Protocol  : $protocolStr');
+      debugPrint('IP        : ${node.domain ?? node.publicIP}');
+      debugPrint('PORT      : $port');
+      debugPrint('username  : $username');
+      debugPrint('password  : $password');
+
+      _sdk.startVpnService(protocolStr, node.domain ?? node.publicIP, port,
           username, password!, node.cert.crt);
     }
   }
 
   Future<void> disconnect() async {
-    FyVpnSdk.stop();
+    _sdk.stop();
   }
 }

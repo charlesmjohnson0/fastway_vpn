@@ -53,6 +53,9 @@
   "yes": "Yes",
   "expires_in_day": "Expires in(day)",
   "expired_day": "Expired (day)",
+  "invalid_exchange_code":"Invalid exchange code!",
+  "connection_error":"Connection error!",
+  "unknown_error":"Unknow error!",
   "devices": "Devices",
   "copied": "Copied",
   "copy": "Copy"
