@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
       //add smart choice
       CountryModel smartCountry = CountryModel(
-          fullName: 'Smart', iso2: 'fy', iso3: 'fy', fullNameCN: 'Smart');
+          fullName: 'Smart', iso2: 'smart', iso3: 'smart', fullNameCN: 'Smart');
       CityModel smartCity =
           CityModel(id: 0, country: smartCountry, name: 'Smart');
 
@@ -86,6 +86,10 @@ class _HomePageState extends State<HomePage> {
         switch (event) {
           case fy_error.fy_err_auth_deny:
             message = S.of(context).invalid_exchange_code;
+            Timer(
+                const Duration(seconds: 3),
+                () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (builder) => const ExchangeCodePage())));
             break;
           case fy_error.fy_err_connection:
             message = S.of(context).connection_error;
@@ -180,11 +184,18 @@ class _HomePageState extends State<HomePage> {
   Widget buildListItem(CountryModel country, List<CityModel> cities) {
     return ListTile(
       title: Text(country.fullName),
-      leading: Flag.fromString(
-        country.iso2,
-        height: 18,
-        width: 36,
-      ),
+      leading: country.iso2 == 'smart'
+          ? const Image(
+              image: AssetImage('images/logo-transparent.png'),
+              fit: BoxFit.scaleDown,
+              height: 18,
+              width: 36,
+            )
+          : Flag.fromString(
+              country.iso2,
+              height: 18,
+              width: 36,
+            ),
       selected: global.city != null
           ? country.iso2 == global.city!.country.iso2
           : false,
@@ -388,14 +399,19 @@ class _HomeLocationState extends State<HomeLocation> {
                 SizedBox(
                     width: 36,
                     height: 18,
-                    child: Flag.fromString(
-                      global.city == null ? 'logo' : global.city!.country.iso2,
-                    )),
+                    child: global.city == null
+                        ? const Image(
+                            image: AssetImage('images/logo-transparent.png'),
+                            fit: BoxFit.scaleDown,
+                          )
+                        : Flag.fromString(
+                            global.city!.country.iso2,
+                          )),
                 const SizedBox(
                   width: 10,
                 ),
                 Text(
-                  global.city == null ? 'SMART' : global.city!.country.fullName,
+                  global.city == null ? 'Smart' : global.city!.country.fullName,
                   style: const TextStyle(color: Colors.white),
                 ),
               ],

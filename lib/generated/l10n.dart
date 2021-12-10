@@ -649,6 +649,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Unable to access the Internet! Please check network settings.`
+  String get unable_access_internet {
+    return Intl.message(
+      'Unable to access the Internet! Please check network settings.',
+      name: 'unable_access_internet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message(
+      'Retry',
+      name: 'retry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retrying, please wait...`
+  String get retrying_pls_wait {
+    return Intl.message(
+      'Retrying, please wait...',
+      name: 'retrying_pls_wait',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry failed! Please check network settings.`
+  String get retry_failed {
+    return Intl.message(
+      'Retry failed! Please check network settings.',
+      name: 'retry_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success!`
+  String get success {
+    return Intl.message(
+      'Success!',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

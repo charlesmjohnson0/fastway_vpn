@@ -3,17 +3,35 @@ import 'dart:convert';
 import 'package:vpn/common/global.dart';
 
 class ApiServerModel {
-  ApiServerModel({required this.prefix});
+  ApiServerModel(
+      {required this.prefix,
+      this.shareUrl,
+      this.supportUrl,
+      this.privacyPolicyUrl,
+      this.termsOfServiceUrl});
 
   String prefix;
+  String? shareUrl;
+  String? supportUrl;
+  String? privacyPolicyUrl;
+  String? termsOfServiceUrl;
 
   factory ApiServerModel.fromJson(Map<String, dynamic> json) {
-    return ApiServerModel(prefix: json['prefix']);
+    return ApiServerModel(
+        prefix: json['prefix'],
+        shareUrl: json['shareUrl'],
+        supportUrl: json['supportUrl'],
+        privacyPolicyUrl: json['privacyPolicyUrl'],
+        termsOfServiceUrl: json['termsOfServiceUrl']);
   }
 
   Map toJson() {
     Map map = {};
     map['prefix'] = prefix;
+    map['shareUrl'] = shareUrl;
+    map['supportUrl'] = supportUrl;
+    map['privacyPolicyUrl'] = privacyPolicyUrl;
+    map['termsOfServiceUrl'] = termsOfServiceUrl;
 
     return map;
   }

@@ -1,3 +1,5 @@
+import 'package:vpn/api/api_models.dart';
+
 import '/common/global.dart';
 import 'package:flutter/material.dart';
 import '/generated/l10n.dart';
@@ -21,12 +23,10 @@ class Option {
 }
 
 class _SettingsState extends State<SettingsPage> {
+  Global global = Global();
   String text = '';
   String subject = '';
   List<String> imagePaths = [];
-  final privacyPolicyUrl = "https://www.google.com";
-  final termsOfService = "https://www.google.com";
-  final supportUrl = "https://www.google.com";
 
   List<Option> options = List.empty(growable: true);
 
@@ -76,26 +76,37 @@ class _SettingsState extends State<SettingsPage> {
           MaterialPageRoute(builder: (context) => const LanguagePage()));
     }));
 
-    //share
-    options.add(Option(S.of(context).share, () {
-      _onShare(context);
-    }));
+    ApiServerModel? apiServerModel = global.apiServerModel;
 
-    //support
-    options.add(Option(S.of(context).support, () {
-      _launchInBrowser(supportUrl);
-    }));
+    if (apiServerModel != null) {
+      if (apiServerModel.shareUrl != null) {
+        //TODO share
+        options.add(Option(S.of(context).share, () {
+          _onShare(context);
+        }));
+      }
 
-    //privacy policy
-    options.add(Option(S.of(context).privacy_policy, () {
-      _launchInBrowser(privacyPolicyUrl);
-    }));
+      if (apiServerModel.supportUrl != null) {
+        //support
+        options.add(Option(S.of(context).support, () {
+          _launchInBrowser(apiServerModel.supportUrl!);
+        }));
+      }
 
-    //terms of service
-    options.add(Option(S.of(context).terms_of_service, () {
-      _launchInBrowser(termsOfService);
-    }));
+      if (apiServerModel.privacyPolicyUrl != null) {
+        //privacy policy
+        options.add(Option(S.of(context).privacy_policy, () {
+          _launchInBrowser(apiServerModel.privacyPolicyUrl!);
+        }));
+      }
 
+      if (apiServerModel.termsOfServiceUrl != null) {
+        //terms of service
+        options.add(Option(S.of(context).terms_of_service, () {
+          _launchInBrowser(apiServerModel.termsOfServiceUrl!);
+        }));
+      }
+    }
     // //about
     // options.add(Option(S.of(context).about, () {
     //   Navigator.push(
@@ -132,18 +143,18 @@ class _SettingsState extends State<SettingsPage> {
                         onTap: option.onTap,
                       );
                     })),
-            const Text(Global.versionInfo),
+            Text(global.versionInfo),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(
+              children: [
+                const Icon(
                   Icons.copyright,
                   size: 16,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
-                Text(Global.copyrightInfo),
+                Text(global.copyrightInfo),
               ],
             )
           ],

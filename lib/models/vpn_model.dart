@@ -16,7 +16,6 @@ enum VpnProtocol {
 
 class VpnModel extends ChangeNotifier {
   final FyVpnSdk _sdk = FyVpnSdk();
-  VpnModel() {}
 
   final Global global = Global();
 

@@ -24,10 +24,13 @@ class Api {
     return sucCode == code;
   }
 
-  void configure(baseUrl,
+  String? deviceId;
+
+  void configure(baseUrl, String deviceId,
       [connectTimeout = 10000,
       receiveTimeout = 10000,
       Iterable<InterceptorsWrapper>? interceptorsWrappers]) {
+    this.deviceId = deviceId;
     _http.configure(
         baseUrl, connectTimeout, receiveTimeout, requestInterceptors());
   }
@@ -37,6 +40,8 @@ class Api {
         InterceptorsWrapper(onRequest: (options, handler) async {
       debugPrint('request url : ${options.uri}');
       debugPrint('request data : ${options.data}');
+
+      options.headers.putIfAbsent('DID', () => deviceId);
 
       handler.next(options);
     }, onResponse: (response, handler) {

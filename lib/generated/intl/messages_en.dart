@@ -83,18 +83,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "remove": MessageLookupByLibrary.simpleMessage("remove"),
+        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "retry_failed": MessageLookupByLibrary.simpleMessage(
+            "Retry failed! Please check network settings."),
+        "retrying_pls_wait":
+            MessageLookupByLibrary.simpleMessage("Retrying, please wait..."),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
         "share_subject": MessageLookupByLibrary.simpleMessage("subject"),
         "share_text": MessageLookupByLibrary.simpleMessage(
             "Secure stable fast vpn https://share.ftvpn.com"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "success": MessageLookupByLibrary.simpleMessage("Success!"),
         "support": MessageLookupByLibrary.simpleMessage("Support"),
         "sure_to_unbind":
             MessageLookupByLibrary.simpleMessage("Are you sure to unbind ?"),
         "terms_of_service":
             MessageLookupByLibrary.simpleMessage("Terms of Service"),
         "title": MessageLookupByLibrary.simpleMessage("Home"),
+        "unable_access_internet": MessageLookupByLibrary.simpleMessage(
+            "Unable to access the Internet! Please check network settings."),
         "unbind_successfully":
             MessageLookupByLibrary.simpleMessage("Unbind successfully!"),
         "unbindding": MessageLookupByLibrary.simpleMessage("Unbindding..."),

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:vpn/pages/splash/splash.dart';
 import '/common/global.dart';
-import '/pages/home/home.dart';
 import '/theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import '/generated/l10n.dart';
@@ -11,26 +11,37 @@ import 'package:provider/provider.dart';
 import 'models/app_model.dart';
 import 'models/vpn_model.dart';
 
+const String defaultApiUrl = 'http://192.168.50.66:8080';
+const int versionMajor = 2;
+const int versionMinor = 1;
+const int versionDevNo = 3344;
+const String copyrightInfo = 'Copyright Fastway 2015-2021';
+
 void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    var app = Global();
-    // Global.defaultApiBaseUrl = 'http://127.0.0.1:8080';
 
     var appModel = AppModel();
     var vpnModel = VpnModel();
-    app.init().then((e) => runApp(MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (context) => appModel),
-            ChangeNotifierProvider(create: (context) => vpnModel),
-          ],
-          child: const MyApp(),
-        )));
+
+    var app = Global();
+    app
+        .init(
+            baseApiUrl: defaultApiUrl,
+            copyrightInfo: copyrightInfo,
+            versionInfo: 'Version $versionMajor.$versionMinor.$versionDevNo')
+        .then((e) => runApp(MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (context) => appModel),
+                ChangeNotifierProvider(create: (context) => vpnModel),
+              ],
+              child: const FastwayApp(),
+            )));
   }, (error, st) => debugPrint(error.toString()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class FastwayApp extends StatelessWidget {
+  const FastwayApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +68,8 @@ class MyApp extends StatelessWidget {
             }
             return const Locale('en');
           },
-          home: const HomePage(),
+          // home: const HomePage(),
+          home: const SplashPage(),
         );
       },
     );

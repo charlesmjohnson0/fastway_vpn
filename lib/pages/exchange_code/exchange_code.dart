@@ -40,7 +40,7 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
         content: Text(S.of(context).verifying),
       ));
       global.bind(code).then((value) async {
-        await Future.delayed(const Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 2));
 
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
 

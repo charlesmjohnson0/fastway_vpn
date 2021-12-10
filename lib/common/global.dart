@@ -22,8 +22,11 @@ class Global {
     return _global;
   }
 
-  static const String versionInfo = 'Version 1.0.0(12345)';
-  static const String copyrightInfo = 'Copyright xxx 2015-2021';
+  String? _version;
+  String get versionInfo => _version ?? 'Version 2.0.1';
+  String? _copyright;
+  String get copyrightInfo => _copyright ?? '';
+
   static const String _languageKey = 'LANGUAGE';
   static const String _connectionProtocolKey = 'CONNECTION_PROTOCOL';
   static const String _exchangeCodeKey = 'EXCHANGE_CODE';
@@ -34,15 +37,31 @@ class Global {
 
   final FyVpnSdk _sdk = FyVpnSdk();
 
-  //TODO fixed on publish
-  static String defaultApiBaseUrl = 'http://192.168.50.66:8080';
+  String? defaultApiBaseUrl;
 
-  Locale _locale = const Locale("en");
+  Future<void> setBaseUrl(String? url) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    if (url == null) {
+      _prefs.remove(_baseUrlKey);
+      return;
+    }
+
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+      _prefs.setString(_baseUrlKey, url);
+    }
+  }
+
+  Future<String?> getBaseUrl() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    return _prefs.getString(_baseUrlKey);
+  }
+
   ExchangeCodeModel? _exchangeCode;
   // late String _deviceId;
   late Map<String, dynamic> _device;
 
   String get userName => _device['deviceId'];
+  String get deviceId => _device['deviceId'];
   String? get password => _exchangeCode!.code;
 
   Future<ExchangeCodeModel?> getExchangeCode() async {
@@ -71,16 +90,14 @@ class Global {
   VpnProtocol _connectionProtocol = VpnProtocol.auto;
   VpnProtocol get protocol => _connectionProtocol;
 
-  fy_state _state = fy_state.NONE;
-  Future<fy_state> get vpnState async {
-    _state = await _sdk.state;
-    return _state;
-  }
-
+  Locale _locale = const Locale("en");
   Locale get locale => _locale;
 
   Api? _api;
   Api? get api => _api;
+
+  ApiServerModel? _apiServerModel;
+  ApiServerModel? get apiServerModel => _apiServerModel;
 
   CityModel? _city;
   CityModel? get city => _city;
@@ -131,7 +148,12 @@ class Global {
     }
   }
 
-  Future<void> init() async {
+  Future<void> init(
+      {required String baseApiUrl,
+      required String copyrightInfo,
+      required String versionInfo}) async {
+    defaultApiBaseUrl = baseApiUrl;
+    _copyright = copyrightInfo;
     SharedPreferences _prefs = await SharedPreferences.getInstance();
 
     initPlatformState();
@@ -149,15 +171,23 @@ class Global {
     if (connectProtocol != null) {
       _connectionProtocol = VpnProtocol.values[connectProtocol];
     }
+  }
 
+  Future<int> initApi() async {
     //get and refresh api servers
     _api = await _getAvailableApi();
+
+    if (api == null) {
+      return -1;
+    }
 
     //refresh cities
     _refreshCities(_api!);
 
     //exchange code check
     await syncBindExchangeCode();
+
+    return 0;
   }
 
   Future<bool> get isExchangeCodeValid async {
@@ -169,7 +199,7 @@ class Global {
   }
 
   Future<ExchangeCodeModel?> syncBindExchangeCode() async {
-    var baseResponse = await _api!.codeInfo(_device['deviceId']);
+    var baseResponse = await _api!.codeInfo(deviceId);
 
     if (Api.isSuc(baseResponse['code'])) {
       Map<String, dynamic> result =
@@ -190,7 +220,7 @@ class Global {
     var baseResponse = await _api!.codeBind(
         exchangeCode,
         DeviceModel(
-            _device['deviceId'],
+            deviceId,
             DeviceType.values.firstWhere(
                 (element) => element.index == _device['platform'])));
 
@@ -213,7 +243,7 @@ class Global {
       return null;
     }
 
-    device ??= DeviceModel(_device['deviceId'], _device['deviceType']);
+    device ??= DeviceModel(deviceId, _device['platform']);
 
     await _api!.codeUnBind(code.code, device);
 
@@ -232,12 +262,7 @@ class Global {
     if (stringList == null || stringList.isEmpty) {
       await _refreshCities(_api!);
     }
-
-    for (var element in stringList!) {
-      debugPrint('city str $element');
-    }
-
-    return stringList.map((e) => CityModel.fromJson(jsonDecode(e))).toList();
+    return stringList!.map((e) => CityModel.fromJson(jsonDecode(e))).toList();
   }
 
   Future<void> _refreshCities(Api api) async {
@@ -284,11 +309,11 @@ class Global {
   Future<Api?> _getAvailableApi() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
 
-    var baseUrl = _prefs.getString(_baseUrlKey);
+    var baseUrl = await getBaseUrl();
 
     Api api = Api();
 
-    api.configure(baseUrl ?? defaultApiBaseUrl);
+    api.configure(baseUrl ?? defaultApiBaseUrl, deviceId);
 
     //Test ping
     try {
@@ -301,6 +326,7 @@ class Global {
       return api;
     } catch (e) {
       debugPrint(e.toString());
+      setBaseUrl(null);
     }
 
     var stringList = _prefs.getStringList(_apiServersKey);
@@ -314,19 +340,21 @@ class Global {
 
     for (var apiServer in list) {
       Api api = Api();
-      api.configure(apiServer.prefix, 3000, 3000);
+      api.configure(apiServer.prefix, deviceId, 3000, 3000);
 
       //Test ping
       try {
         var pong = await api.ping();
 
         if (Api.isSuc(pong['code'])) {
-          debugPrint('ping suc !');
+          debugPrint('set api : ${apiServer.prefix}');
+
+          setBaseUrl(apiServer.prefix);
+
+          _apiServerModel = apiServer;
+
+          _refreshApiServers(api);
         }
-
-        _prefs.setString(_baseUrlKey, apiServer.prefix);
-
-        _refreshApiServers(api);
 
         return api;
       } catch (e) {

@@ -53,10 +53,15 @@
   "yes": "Yes",
   "expires_in_day": "Expires in(day)",
   "expired_day": "Expired (day)",
-  "invalid_exchange_code":"Invalid exchange code!",
-  "connection_error":"Connection error!",
-  "unknown_error":"Unknow error!",
+  "invalid_exchange_code": "Invalid exchange code!",
+  "connection_error": "Connection error!",
+  "unknown_error": "Unknow error!",
   "devices": "Devices",
   "copied": "Copied",
-  "copy": "Copy"
+  "copy": "Copy",
+  "unable_access_internet": "Unable to access the Internet! Please check network settings.",
+  "retry": "Retry",
+  "retrying_pls_wait": "Retrying, please wait...",
+  "retry_failed": "Retry failed! Please check network settings.",
+  "success": "Success!"
 }
