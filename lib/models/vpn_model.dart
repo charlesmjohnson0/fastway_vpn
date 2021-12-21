@@ -43,6 +43,8 @@ class VpnModel extends ChangeNotifier {
   Future<void> toggle() async {
     _state = await getState();
 
+    debugPrint('toggle state : $_state');
+
     switch (_state) {
       case fy_state.AUTHENTICATING:
       case fy_state.CONFIGURING:
@@ -54,7 +56,7 @@ class VpnModel extends ChangeNotifier {
         await connect();
     }
 
-    _state = await _sdk.state;
+    _state = await getState();
 
     notifyListeners();
   }
@@ -102,14 +104,14 @@ class VpnModel extends ChangeNotifier {
           break;
       }
 
-      debugPrint('Protocol  : $protocolStr');
-      debugPrint('IP        : ${node.domain ?? node.publicIP}');
-      debugPrint('PORT      : $port');
-      debugPrint('username  : $username');
-      debugPrint('password  : $password');
+      // debugPrint('Protocol  : $protocolStr');
+      // debugPrint('IP        : ${node.domain ?? node.publicIP}');
+      // debugPrint('PORT      : $port');
+      // debugPrint('username  : $username');
+      // debugPrint('password  : $password');
 
       _sdk.startVpnService(protocolStr, node.domain ?? node.publicIP, port,
-          username, password!, node.cert.crt);
+          username, password!, node.crt);
     }
   }
 

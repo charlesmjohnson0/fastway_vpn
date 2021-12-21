@@ -18,9 +18,14 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
   @override
   void initState() {
     super.initState();
-    global.syncBindExchangeCode().then((value) {
+
+    global.getExchangeCode().then((value) {
       exchangeCode = value;
       setState(() {});
+      global.syncBindExchangeCode().then((value) {
+        exchangeCode = value;
+        setState(() {});
+      });
     });
   }
 
@@ -29,7 +34,7 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
     super.deactivate();
   }
 
-  void bind(BuildContext context, String code) {
+  void bind(String code) {
     if (_isValidCode(code)) {
       //close keyboard
       _focusNode.unfocus();
@@ -39,51 +44,52 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(S.of(context).verifying),
       ));
-      global.bind(code).then((value) async {
+      global.bind(code).then((baseResponse) async {
         await Future.delayed(const Duration(seconds: 2));
 
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-        if (value == null) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(S.of(context).verification_failed),
-            duration: const Duration(seconds: 3),
-          ));
-        } else {
+        if (baseResponse.isSuc) {
+          exchangeCode = baseResponse.result;
+          setState(() {});
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).verified_successfully),
-            duration: const Duration(seconds: 3),
+            duration: const Duration(seconds: 2),
           ));
+          await Future.delayed(const Duration(seconds: 3));
           Navigator.of(context).pop();
-          exchangeCode = value;
-          setState(() {});
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(S.of(context).verification_failed),
+            duration: const Duration(seconds: 2),
+          ));
         }
       });
     }
   }
 
-  void unbind(BuildContext context, DeviceModel? device) {
+  void unbind(DeviceModel? device) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(S.of(context).unbindding),
     ));
-    global.unbind(device).then((value) async {
-      await Future.delayed(const Duration(seconds: 3));
+    global.unbind(device).then((baseResponse) {
+      if (baseResponse != null && baseResponse.isSuc) {
+        global.syncBindExchangeCode().then((value) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(S.of(context).unbind_successfully),
+            duration: const Duration(seconds: 2),
+          ));
 
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-      if (value == null) {
+          exchangeCode = value;
+          setState(() {});
+        });
+      } else {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(S.of(context).unbinding_failed),
-          duration: const Duration(seconds: 3),
+          duration: const Duration(seconds: 2),
         ));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(S.of(context).unbind_successfully),
-          duration: const Duration(seconds: 3),
-        ));
-        Navigator.of(context).pop();
-        exchangeCode = value;
-        setState(() {});
       }
     });
   }
@@ -127,9 +133,6 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
       // ],
       onSubmitted: (val) {
         _validCode = _isValidCode(val);
-        if (_validCode) {
-          bind(context, val);
-        }
       },
       onChanged: (val) {
         _validCode = _isValidCode(val);
@@ -144,7 +147,7 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
             ? TextButton(
                 onPressed: () {
                   String code = _codeController.text;
-                  bind(context, code);
+                  bind(code);
                 },
                 child: Text(S.of(context).submit),
               )
@@ -198,12 +201,15 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                      title: Text(exchangeCode!.devices[index].deviceId),
+                      title: Text(exchangeCode!.devices[index].deviceId,
+                          overflow: TextOverflow.visible
+                          // maxLines: 1,
+                          ),
                       trailing: TextButton(
                         child: Text(S.of(context).remove),
                         onPressed: () {
                           Navigator.of(context).pop(index);
-                          unbind(context, exchangeCode!.devices[index]);
+                          unbind(exchangeCode!.devices[index]);
                         },
                       ),
                       onTap: () {
@@ -247,7 +253,7 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
                             TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
-                                  unbind(context, null);
+                                  unbind(null);
                                 },
                                 child: Text(S.of(context).yes)),
                           ],

@@ -60,8 +60,11 @@ class Global {
   // late String _deviceId;
   late Map<String, dynamic> _device;
 
-  String get userName => _device['deviceId'];
+  String get userName => deviceId;
   String get deviceId => _device['deviceId'];
+  DeviceType get platform => DeviceType.values
+      .firstWhere((element) => element.index == _device['platform']);
+
   String? get password => _exchangeCode!.code;
 
   Future<ExchangeCodeModel?> getExchangeCode() async {
@@ -71,7 +74,6 @@ class Global {
     if (exchangeCodeStr == null) {
       return null;
     }
-
     _exchangeCode = ExchangeCodeModel.fromJson(jsonDecode(exchangeCodeStr));
     return _exchangeCode;
   }
@@ -156,7 +158,7 @@ class Global {
     _copyright = copyrightInfo;
     SharedPreferences _prefs = await SharedPreferences.getInstance();
 
-    initPlatformState();
+    await initPlatformState();
 
     //language set
     String? language = _prefs.getString(_languageKey);
@@ -199,12 +201,11 @@ class Global {
   }
 
   Future<ExchangeCodeModel?> syncBindExchangeCode() async {
-    var baseResponse = await _api!.codeInfo(deviceId);
+    BaseResponse<ExchangeCodeModel> baseResponse =
+        await _api!.codeInfo(deviceId);
 
-    if (Api.isSuc(baseResponse['code'])) {
-      Map<String, dynamic> result =
-          baseResponse['result'] as Map<String, dynamic>;
-      ExchangeCodeModel exchangeCode = ExchangeCodeModel.fromJson(result);
+    if (baseResponse.isSuc) {
+      ExchangeCodeModel? exchangeCode = baseResponse.result;
 
       setExchangeCode(exchangeCode);
 
@@ -216,38 +217,30 @@ class Global {
     return null;
   }
 
-  Future<ExchangeCodeModel?> bind(String exchangeCode) async {
-    var baseResponse = await _api!.codeBind(
-        exchangeCode,
-        DeviceModel(
-            deviceId,
-            DeviceType.values.firstWhere(
-                (element) => element.index == _device['platform'])));
+  Future<BaseResponse<ExchangeCodeModel>> bind(String exchangeCode) async {
+    BaseResponse<ExchangeCodeModel> baseResponse =
+        await _api!.codeBind(exchangeCode, DeviceModel(deviceId, platform));
 
-    if (Api.isSuc(baseResponse['code'])) {
-      Map<String, dynamic> result =
-          baseResponse['result'] as Map<String, dynamic>;
-
-      setExchangeCode(ExchangeCodeModel.fromJson(result));
-
-      return _exchangeCode;
+    if (baseResponse.isSuc) {
+      setExchangeCode(baseResponse.result);
     }
 
-    return null;
+    return baseResponse;
   }
 
-  Future<ExchangeCodeModel?> unbind(DeviceModel? device) async {
+  Future<BaseResponse?> unbind(DeviceModel? device) async {
     ExchangeCodeModel? code = await getExchangeCode();
 
     if (code == null) {
       return null;
     }
 
-    device ??= DeviceModel(deviceId, _device['platform']);
+    device ??= DeviceModel(deviceId, platform);
 
-    await _api!.codeUnBind(code.code, device);
+    // Future.delayed(const Duration(seconds: 5))
+    //     .then((value) => syncBindExchangeCode());
 
-    return syncBindExchangeCode();
+    return _api!.codeUnBind(code.code, device);
   }
 
   Future<void> changeLocation(CityModel? cityModel) async {
@@ -266,13 +259,10 @@ class Global {
   }
 
   Future<void> _refreshCities(Api api) async {
-    var baseResponse = await api.citiesFindAll();
+    BaseResponse<List<CityModel>> baseResponse = await api.citiesFindAll();
 
-    if (Api.isSuc(baseResponse['code'])) {
-      var result = baseResponse['result'] as List;
-
-      List<CityModel> cities =
-          result.map((e) => CityModel.fromJson(e)).toList();
+    if (baseResponse.isSuc) {
+      List<CityModel> cities = baseResponse.result ?? [];
 
       SharedPreferences _prefs = await SharedPreferences.getInstance();
 
@@ -282,27 +272,20 @@ class Global {
   }
 
   Future<void> _refreshApiServers(Api api) async {
-    try {
-      var baseResponse = await api.apiServerFindAll();
+    BaseResponse<List<ApiServerModel>> response = await api.apiServerFindAll();
 
-      if (Api.isSuc(baseResponse['code'])) {
-        var result = baseResponse['result'] as List;
+    if (response.isSuc) {
+      List<ApiServerModel> apiServers = response.result ?? [];
 
-        List<ApiServerModel> apiServers =
-            result.map((e) => ApiServerModel.fromJson(e)).toList();
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
 
-        SharedPreferences _prefs = await SharedPreferences.getInstance();
-
-        _prefs.setStringList(
-            _apiServersKey,
-            apiServers
-                .map((e) => e.toJson())
-                .toList()
-                .map((e) => jsonEncode(e))
-                .toList());
-      }
-    } catch (e) {
-      debugPrint(e.toString());
+      _prefs.setStringList(
+          _apiServersKey,
+          apiServers
+              .map((e) => e.toJson())
+              .toList()
+              .map((e) => jsonEncode(e))
+              .toList());
     }
   }
 
@@ -313,19 +296,18 @@ class Global {
 
     Api api = Api();
 
-    api.configure(baseUrl ?? defaultApiBaseUrl, deviceId);
+    api.configure(
+      baseUrl: baseUrl ?? defaultApiBaseUrl,
+      deviceId: deviceId,
+    );
 
-    //Test ping
-    try {
-      var pong = await api.ping();
+    BaseResponse pong = await api.ping();
 
-      if (Api.isSuc(pong['code'])) {
-        debugPrint('ping suc !');
-      }
+    if (pong.isSuc) {
+      debugPrint('ping suc !');
 
       return api;
-    } catch (e) {
-      debugPrint(e.toString());
+    } else {
       setBaseUrl(null);
     }
 
@@ -340,25 +322,25 @@ class Global {
 
     for (var apiServer in list) {
       Api api = Api();
-      api.configure(apiServer.prefix, deviceId, 3000, 3000);
 
-      //Test ping
-      try {
-        var pong = await api.ping();
+      api.configure(
+          baseUrl: apiServer.prefix,
+          deviceId: deviceId,
+          connectTimeout: 3000,
+          receiveTimeout: 3000);
 
-        if (Api.isSuc(pong['code'])) {
-          debugPrint('set api : ${apiServer.prefix}');
+      BaseResponse pong = await api.ping();
 
-          setBaseUrl(apiServer.prefix);
+      if (pong.isSuc) {
+        debugPrint('set api : ${apiServer.prefix}');
 
-          _apiServerModel = apiServer;
+        setBaseUrl(apiServer.prefix);
 
-          _refreshApiServers(api);
-        }
+        _apiServerModel = apiServer;
 
-        return api;
-      } catch (e) {
-        debugPrint(e.toString());
+        _refreshApiServers(api);
+      } else {
+        setBaseUrl(null);
       }
     }
 
@@ -381,13 +363,16 @@ class Global {
 
   Future<NodeModel?> findNode() async {
     int cityId = 0;
+
     if (_city != null) {
       cityId = _city!.id;
     }
-    var response = await _api!.nodeFind(cityId: cityId, protocol: protocol);
 
-    if (Api.isSuc(response['code'])) {
-      return NodeModel.fromJson(response['result']);
+    BaseResponse<NodeModel> response =
+        await _api!.nodeFind(cityId: cityId, protocol: protocol);
+
+    if (response.isSuc) {
+      return response.result;
     }
 
     return null;

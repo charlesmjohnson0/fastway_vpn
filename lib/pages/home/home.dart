@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
       //add smart choice
       CountryModel smartCountry = CountryModel(
-          fullName: 'Smart', iso2: 'smart', iso3: 'smart', fullNameCN: 'Smart');
+          fullName: 'Smart', iso2: 'Smart', iso3: 'Smart', fullNameCN: 'Smart');
       CityModel smartCity =
           CityModel(id: 0, country: smartCountry, name: 'Smart');
 
@@ -86,10 +86,6 @@ class _HomePageState extends State<HomePage> {
         switch (event) {
           case fy_error.fy_err_auth_deny:
             message = S.of(context).invalid_exchange_code;
-            Timer(
-                const Duration(seconds: 3),
-                () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (builder) => const ExchangeCodePage())));
             break;
           case fy_error.fy_err_connection:
             message = S.of(context).connection_error;
@@ -183,7 +179,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildListItem(CountryModel country, List<CityModel> cities) {
     return ListTile(
-      title: Text(country.fullName),
+      title: Text(country.fullName,
+          style: const TextStyle(fontWeight: FontWeight.bold)),
       leading: country.iso2 == 'smart'
           ? const Image(
               image: AssetImage('images/logo-transparent.png'),
@@ -412,7 +409,10 @@ class _HomeLocationState extends State<HomeLocation> {
                 ),
                 Text(
                   global.city == null ? 'Smart' : global.city!.country.fullName,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),

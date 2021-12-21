@@ -56,6 +56,7 @@ class Http {
     }
 
     Map headers = {};
+
     if (header != null) {
       headers.addAll(header);
     }
@@ -75,6 +76,7 @@ class Http {
           cancelToken: cancelToken);
     } on DioError catch (e) {
       debugPrint('process error : $e');
+      rethrow;
     }
 
     return response;

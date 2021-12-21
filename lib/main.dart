@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 import 'models/app_model.dart';
 import 'models/vpn_model.dart';
 
-const String defaultApiUrl = 'http://192.168.50.66:8080';
+// const String defaultApiUrl = 'http://192.168.50.66:8080';
+const String defaultApiUrl = 'http://api.fastway.cloud';
 const int versionMajor = 2;
 const int versionMinor = 1;
 const int versionDevNo = 3344;

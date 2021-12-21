@@ -1,6 +1,17 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:vpn/common/global.dart';
+
+class BaseResponse<T> {
+  BaseResponse({required this.code, this.result, this.msg, this.error});
+  int code;
+  String? msg;
+  T? result;
+  DioError? error;
+
+  bool get isSuc => code == 200;
+}
 
 class ApiServerModel {
   ApiServerModel(
@@ -92,30 +103,13 @@ class CityModel {
   }
 }
 
-class CertModel {
-  CertModel({required this.id, required this.crt});
-  int id;
-  String crt;
-
-  factory CertModel.fromJson(Map<String, dynamic> json) {
-    return CertModel(id: json['id'], crt: json['crt']);
-  }
-
-  Map toJson() {
-    Map map = {};
-    map['id'] = id;
-    map['crt'] = crt;
-    return map;
-  }
-}
-
 class NodeModel {
   NodeModel({
     required this.city,
     required this.name,
     required this.publicIP,
     this.domain,
-    required this.cert,
+    required this.crt,
     required this.fyUdpPort,
     required this.fyTcpPort,
     required this.fyDtlsPort,
@@ -126,7 +120,7 @@ class NodeModel {
   String name;
   String publicIP;
   String? domain;
-  CertModel cert;
+  String crt;
   int fyUdpPort;
   int fyTcpPort;
   int fyDtlsPort;
@@ -135,7 +129,7 @@ class NodeModel {
   factory NodeModel.fromJson(Map<String, dynamic> json) {
     return NodeModel(
       city: CityModel.fromJson(json['city']),
-      cert: CertModel.fromJson(json['cert']),
+      crt: json['crt'],
       name: json['name'],
       publicIP: json['publicIP'],
       domain: json['domain'] == '' ? null : json['domain'],
@@ -152,10 +146,9 @@ class NodeModel {
     map['name'] = name;
     map['publicIP'] = publicIP;
     map['domain'] = domain;
-    map['cert'] = cert.toJson();
+    map['crt'] = crt;
     map['lwUdpPort'] = fyUdpPort;
     map['lwTcpPort'] = fyTcpPort;
-
     return map;
   }
 }
@@ -254,7 +247,7 @@ class ExchangeCodeModel {
     map['code'] = code;
     map['validStartTime'] = validStartTime;
     map['validEndTime'] = validEndTime;
-    map['devices'] = json.encode(devices);
+    map['devices'] = devices;
     return map;
   }
 }

@@ -15,24 +15,24 @@ class Api {
   //   init();
   // }
 
-  static const int sucCode = 200;
   final Http _http = Http();
 
   Api();
 
-  static bool isSuc(int code) {
-    return sucCode == code;
-  }
-
   String? deviceId;
+  VoidCallback? onErrorCallback;
 
-  void configure(baseUrl, String deviceId,
-      [connectTimeout = 10000,
+  void configure(
+      {required baseUrl,
+      required String deviceId,
+      connectTimeout = 10000,
       receiveTimeout = 10000,
-      Iterable<InterceptorsWrapper>? interceptorsWrappers]) {
+      // Iterable<InterceptorsWrapper>? interceptorsWrappers,
+      VoidCallback? onErrorCallback}) {
     this.deviceId = deviceId;
     _http.configure(
         baseUrl, connectTimeout, receiveTimeout, requestInterceptors());
+    this.onErrorCallback = onErrorCallback;
   }
 
   List<InterceptorsWrapper> requestInterceptors() {
@@ -53,6 +53,7 @@ class Api {
         case DioErrorType.connectTimeout:
         case DioErrorType.sendTimeout:
         case DioErrorType.receiveTimeout:
+          onErrorCallback!.call();
           break;
         case DioErrorType.response:
         case DioErrorType.other:
@@ -68,74 +69,122 @@ class Api {
     return [interceptorsWrapper];
   }
 
-  Future ping() async {
-    var response = await _http.get('/public/ping');
+  Future<BaseResponse> ping() async {
+    try {
+      var response = await _http.get('/public/ping');
 
-    return response.data;
-  }
-
-  Future apiServerFindAll() async {
-    var response = await _http.get('/api/servers');
-
-    return response.data;
-  }
-
-  Future citiesFindAll() async {
-    Response response = await _http.get('/api/cities');
-
-    return response.data;
-  }
-
-  Future nodeFind({int? cityId, VpnProtocol? protocol}) async {
-    Response response = await _http.get('/api/node',
-        params: {'cityId': cityId, 'protocol': protocol!.index});
-
-    return response.data;
-  }
-
-  Future nodesFindAll({int? cityId}) async {
-    var params = {};
-
-    if (cityId != null) {
-      params = {'cityId': cityId};
+      return BaseResponse(code: response.data['code']);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
     }
-
-    Response response = await _http.get('/api/nodes', params: params);
-    return response.data;
   }
 
-  Future codeInfo(String deviceId) async {
-    Response response =
-        await _http.get('/api/codes', params: {'deviceId': deviceId});
+  Future<BaseResponse<List<ApiServerModel>>> apiServerFindAll() async {
+    try {
+      var response = await _http.get('/api/servers');
 
-    // var baseResponse = response.data;
-    //
-    // if (Api.isSuc(baseResponse['code'])) {
-    //   var result = baseResponse['result'];
-    //
-    //   CodeModel codeModel = CodeModel.fromJson(result);
-    //
-    // }
+      var code = response.data['code'];
+      List<ApiServerModel> result = [];
 
-    return response.data;
+      if (response.data['result'] != null) {
+        var list = response.data['result'] as List;
+        result = list.map((e) => ApiServerModel.fromJson(e)).toList();
+      }
+
+      return BaseResponse(code: code, result: result);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
+    }
   }
 
-  Future codeBind(String code, DeviceModel device) async {
-    var response = await _http.put('/api/codes/:code',
-        pathParams: {'code': code}, params: device);
+  Future<BaseResponse<List<CityModel>>> citiesFindAll() async {
+    try {
+      Response response = await _http.get('/api/cities');
 
-    return response.data;
+      var code = response.data['code'];
+      List<CityModel> result = [];
+
+      if (response.data['result'] != null) {
+        var list = response.data['result'] as List;
+        result = list.map((e) => CityModel.fromJson(e)).toList();
+      }
+
+      return BaseResponse(code: code, result: result);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
+    }
   }
 
-  Future codeUnBind(String code, DeviceModel device) async {
-    var response = await _http.delete('/api/codes/:code',
-        pathParams: {'code': code}, params: device);
+  Future<BaseResponse<NodeModel>> nodeFind(
+      {int? cityId, VpnProtocol? protocol}) async {
+    try {
+      Response response = await _http.get('/api/node',
+          params: {'cityId': cityId, 'protocol': protocol!.index});
 
-    return response.data;
+      var code = response.data['code'];
+
+      NodeModel? result;
+
+      if (response.data['result'] != null) {
+        result = NodeModel.fromJson(response.data['result']);
+      }
+
+      return BaseResponse(code: code, result: result);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
+    }
   }
 
-  Future countriesFindAll() async {
-    Response response = await _http.get('public/countries');
-    return response.data;
+  Future<BaseResponse<ExchangeCodeModel>> codeInfo(String deviceId) async {
+    try {
+      Response response =
+          await _http.get('/api/codes', params: {'deviceId': deviceId});
+
+      var code = response.data['code'];
+      ExchangeCodeModel? result;
+
+      if (response.data['result'] != null) {
+        result = ExchangeCodeModel.fromJson(response.data['result']);
+      }
+
+      return BaseResponse(code: code, result: result);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
+    }
+  }
+
+  Future<BaseResponse<ExchangeCodeModel>> codeBind(
+      String exchangeCode, DeviceModel device) async {
+    try {
+      Response response = await _http.put('/api/codes/:code',
+          pathParams: {'code': exchangeCode}, params: device);
+
+      var code = response.data['code'];
+
+      ExchangeCodeModel? result;
+
+      if (response.data['result'] != null) {
+        result = ExchangeCodeModel.fromJson(response.data['result']);
+      }
+
+      return BaseResponse(code: code, result: result);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
+    }
+  }
+
+  Future<BaseResponse> codeUnBind(
+      String exchangeCode, DeviceModel device) async {
+    try {
+      Response response = await _http.delete('/api/codes/:code',
+          pathParams: {'code': exchangeCode}, params: device);
+
+      var code = response.data['code'];
+      // var result = response.data['result'];
+
+      return BaseResponse(code: code);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
+    }
   }
 }
