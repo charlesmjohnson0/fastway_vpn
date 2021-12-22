@@ -11,34 +11,43 @@ import 'package:provider/provider.dart';
 import 'models/app_model.dart';
 import 'models/vpn_model.dart';
 
-// const String defaultApiUrl = 'http://192.168.50.66:8080';
 const String defaultApiUrl = 'http://api.fastway.cloud';
 const int versionMajor = 2;
 const int versionMinor = 1;
 const int versionDevNo = 3344;
-const String copyrightInfo = 'Copyright Fastway 2015-2021';
+const String copyrightInfo = 'Copyright Fastway 2016-2022';
 
 void main() async {
-  await runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  var app = Global();
 
-    var appModel = AppModel();
-    var vpnModel = VpnModel();
+  FlutterError.onError = (FlutterErrorDetails details) {
+    app.reportError(details.exception, details.stack);
+  };
 
-    var app = Global();
-    app
-        .init(
-            baseApiUrl: defaultApiUrl,
-            copyrightInfo: copyrightInfo,
-            versionInfo: 'Version $versionMajor.$versionMinor.$versionDevNo')
-        .then((e) => runApp(MultiProvider(
-              providers: [
-                ChangeNotifierProvider(create: (context) => appModel),
-                ChangeNotifierProvider(create: (context) => vpnModel),
-              ],
-              child: const FastwayApp(),
-            )));
-  }, (error, st) => debugPrint(error.toString()));
+  await runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      var appModel = AppModel();
+      var vpnModel = VpnModel();
+
+      app
+          .init(
+              baseApiUrl: defaultApiUrl,
+              copyrightInfo: copyrightInfo,
+              versionInfo: 'Version $versionMajor.$versionMinor.$versionDevNo')
+          .then((e) => runApp(MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(create: (context) => appModel),
+                  ChangeNotifierProvider(create: (context) => vpnModel),
+                ],
+                child: const FastwayApp(),
+              )));
+    },
+    (Object error, StackTrace stack) {
+      app.reportError(error, stack);
+    },
+  );
 }
 
 class FastwayApp extends StatelessWidget {

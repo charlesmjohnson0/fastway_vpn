@@ -243,10 +243,6 @@ class Global {
     return _api!.codeUnBind(code.code, device);
   }
 
-  Future<void> changeLocation(CityModel? cityModel) async {
-    _city = cityModel;
-  }
-
   Future<List<CityModel>?> getAllCities() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
 
@@ -347,6 +343,13 @@ class Global {
     return null;
   }
 
+  NodeModel? nodeModel;
+  Future<void> changeLocation(CityModel? cityModel) async {
+    _city = cityModel;
+    nodeModel = null;
+    findNode().then((value) => nodeModel = value);
+  }
+
   Future<void> changeProtocol(VpnProtocol connectMode) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     _prefs
@@ -362,6 +365,12 @@ class Global {
   }
 
   Future<NodeModel?> findNode() async {
+    if (nodeModel != null) {
+      if (_city == null || _city!.id == nodeModel!.city.id) {
+        return nodeModel;
+      }
+    }
+
     int cityId = 0;
 
     if (_city != null) {
@@ -376,5 +385,10 @@ class Global {
     }
 
     return null;
+  }
+
+  Future<void> reportError(Object e, StackTrace? stackTrace) async {
+    _api!.reportError(
+        deviceId, platform.toString(), e.toString(), stackTrace!.toString());
   }
 }

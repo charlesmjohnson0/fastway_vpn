@@ -187,4 +187,22 @@ class Api {
       return BaseResponse(code: 0, error: e);
     }
   }
+
+  Future<BaseResponse> reportError(
+      String deviceId, String platform, String error, String stackTrack) async {
+    try {
+      Response response = await _http.post('/api/exceptions', params: {
+        'deviceId': deviceId,
+        'platform': platform,
+        'error': error,
+        'stackTrack': stackTrack
+      });
+
+      var code = response.data['code'];
+
+      return BaseResponse(code: code);
+    } on DioError catch (e) {
+      return BaseResponse(code: 0, error: e);
+    }
+  }
 }
