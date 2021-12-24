@@ -15,7 +15,7 @@ const String defaultApiUrl = 'http://api.fastway.cloud';
 const int versionMajor = 2;
 const int versionMinor = 1;
 const int versionDevNo = 3344;
-const String copyrightInfo = 'Copyright Fastway 2016-2022';
+const String copyrightInfo = 'Copyright Fastway Inc. 2016-2022';
 
 void main() async {
   var app = Global();

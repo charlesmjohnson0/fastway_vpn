@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '/generated/l10n.dart';
 import '/pages/settings/settings_connection_mode.dart';
 import '/pages/settings/settings_language.dart';
-import 'package:share_plus/share_plus.dart';
+// import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -30,23 +30,23 @@ class _SettingsState extends State<SettingsPage> {
 
   List<Option> options = List.empty(growable: true);
 
-  void _onShare(BuildContext context) async {
-    text = S.of(context).share_text;
-    subject = S.of(context).share_subject;
+  // void _onShare(BuildContext context) async {
+  //   text = S.of(context).share_text;
+  //   subject = S.of(context).share_subject;
 
-    final box = context.findRenderObject() as RenderBox?;
+  //   final box = context.findRenderObject() as RenderBox?;
 
-    if (imagePaths.isNotEmpty) {
-      await Share.shareFiles(imagePaths,
-          text: text,
-          subject: subject,
-          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
-    } else {
-      await Share.share(text,
-          subject: subject,
-          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
-    }
-  }
+  //   if (imagePaths.isNotEmpty) {
+  //     await Share.shareFiles(imagePaths,
+  //         text: text,
+  //         subject: subject,
+  //         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+  //   } else {
+  //     await Share.share(text,
+  //         subject: subject,
+  //         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+  //   }
+  // }
 
   Future<void> _launchInBrowser(String url) async {
     if (await canLaunch(url)) {
@@ -64,11 +64,11 @@ class _SettingsState extends State<SettingsPage> {
   void loadOptions() {
     options.clear();
 
-    //connection mode
-    options.add(Option(S.of(context).connection_mode, () {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const ConnectionModePage()));
-    }));
+    // //connection mode
+    // options.add(Option(S.of(context).connection_mode, () {
+    //   Navigator.push(context,
+    //       MaterialPageRoute(builder: (context) => const ConnectionModePage()));
+    // }));
 
     //language
     options.add(Option(S.of(context).language, () {
@@ -79,12 +79,12 @@ class _SettingsState extends State<SettingsPage> {
     ApiServerModel? apiServerModel = global.apiServerModel;
 
     if (apiServerModel != null) {
-      if (apiServerModel.shareUrl != null) {
-        //TODO share
-        options.add(Option(S.of(context).share, () {
-          _onShare(context);
-        }));
-      }
+      // if (apiServerModel.shareUrl != null) {
+      //     //TODO share
+      //     options.add(Option(S.of(context).share, () {
+      //       _onShare(context);
+      //     }));
+      // }
 
       if (apiServerModel.supportUrl != null) {
         //support

@@ -1,0 +1,4 @@
+storePassword = PZjfHeYFws
+keyPassword = PZjfHeYFws
+keyAlias = fastway
+storeFile = /Users/hlinktech/Desktop/Fastway/codes/certs/fastway-release.keystore

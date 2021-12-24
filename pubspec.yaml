@@ -34,12 +34,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  fluro: ^2.0.0
-  shared_preferences: ^2.0.8
-  provider: ^6.0.0
-  flag: ^5.0.1
-  share_plus: ^2.1.4
-  url_launcher: ^6.0.10
+  fluro: ^2.0.3
+  shared_preferences: ^2.0.11
+  provider: ^6.0.1
+  # flag: ^5.0.1
+  country_icons: ^2.0.2
+  # share_plus: ^3.0.4
+  url_launcher: ^6.0.17
   dio: ^4.0.0
   # device_info: ^2.0.3
 
@@ -75,6 +76,7 @@ flutter:
   assets:
     - images/logo.png
     - images/logo-transparent.png
+    - images/smart.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

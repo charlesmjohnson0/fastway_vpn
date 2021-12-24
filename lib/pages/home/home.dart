@@ -9,8 +9,16 @@ import '/common/global.dart';
 import 'package:flutter/material.dart';
 import '/generated/l10n.dart';
 import '/pages/settings/settings.dart';
-import 'package:flag/flag.dart';
 import 'package:fy_vpn_sdk/fy_vpn_sdk.dart';
+
+AssetImage buildCountryIcon(CountryModel? country) {
+  if (country == null || country.iso2.toLowerCase() == 'smart') {
+    return const AssetImage('images/smart.png');
+  }
+
+  return AssetImage('icons/flags/png/${country.iso2.toLowerCase()}.png',
+      package: 'country_icons');
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -181,27 +189,97 @@ class _HomePageState extends State<HomePage> {
     return ListTile(
       title: Text(country.fullName,
           style: const TextStyle(fontWeight: FontWeight.bold)),
-      leading: country.iso2 == 'smart'
-          ? const Image(
-              image: AssetImage('images/logo-transparent.png'),
-              fit: BoxFit.scaleDown,
-              height: 18,
-              width: 36,
-            )
-          : Flag.fromString(
-              country.iso2,
-              height: 18,
-              width: 36,
-            ),
-      selected: global.city != null
-          ? country.iso2 == global.city!.country.iso2
-          : false,
+      leading: Image(
+        image: buildCountryIcon(country),
+        fit: BoxFit.scaleDown,
+        height: 18,
+        width: 36,
+      ),
+      selected:
+          global.city != null && country.iso2 == global.city!.country.iso2,
       onTap: () {
         //first city
         global.changeLocation(cities[0]);
         Navigator.of(context).pop();
       },
     );
+  }
+
+  Widget countryItem(CountryModel country, List<CityModel> cities) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+      child: InkWell(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Image(
+                  image: buildCountryIcon(country),
+                  fit: BoxFit.scaleDown,
+                  height: 18,
+                  width: 36,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  country.fullName,
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                )
+              ],
+            ),
+            ((global.city == null && country.iso2.toLowerCase() == 'smart') ||
+                    (global.city != null &&
+                        country.iso2 == global.city!.country.iso2))
+                ? const Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  )
+                : const SizedBox(),
+          ],
+        ),
+        onTap: () {
+          if (cities[0].id == 0) {
+            global.changeLocation(null);
+          } else {
+            global.changeLocation(cities[0]);
+          }
+
+          setState(() {});
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+
+    // return ListTile(
+    //   title: Text(
+    //     country.fullName,
+    //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    //   ),
+    //   leading: Image(
+    //     image: buildCountryIcon(country),
+    //     fit: BoxFit.scaleDown,
+    //     height: 18,
+    //     width: 36,
+    //   ),
+    //   selected: (global.city == null &&
+    //           country.iso2.toLowerCase() == 'smart') ||
+    //       (global.city != null && country.iso2 == global.city!.country.iso2),
+    //   onTap: () {
+    //     //first city
+    //     if (cities[0].id == 0) {
+    //       global.changeLocation(null);
+    //     } else {
+    //       global.changeLocation(cities[0]);
+    //     }
+
+    //     setState(() {});
+    //     Navigator.of(context).pop();
+    //   },
+    // );
   }
 
   void showLocationList() {
@@ -228,8 +306,7 @@ class _HomePageState extends State<HomePage> {
                         Center(
                           child: Text(
                             S.of(context).change_location,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16.0),
+                            style: const TextStyle(fontSize: 16.0),
                           ),
                         ),
                         IconButton(
@@ -253,28 +330,7 @@ class _HomePageState extends State<HomePage> {
                             List<CityModel> cities =
                                 _countryMap.values.toList()[index];
 
-                            return ListTile(
-                              title: Text(country.fullName),
-                              leading: Flag.fromString(
-                                country.iso2,
-                                height: 18,
-                                width: 36,
-                              ),
-                              selected: global.city != null
-                                  ? country.iso2 == global.city!.country.iso2
-                                  : false,
-                              onTap: () {
-                                //first city
-                                if (cities[0].id == 0) {
-                                  global.changeLocation(null);
-                                } else {
-                                  global.changeLocation(cities[0]);
-                                }
-
-                                setState(() {});
-                                Navigator.of(context).pop(index);
-                              },
-                            );
+                            return countryItem(country, cities);
                           }))
                 ],
               ));
@@ -394,16 +450,14 @@ class _HomeLocationState extends State<HomeLocation> {
             Row(
               children: [
                 SizedBox(
-                    width: 36,
-                    height: 18,
-                    child: global.city == null
-                        ? const Image(
-                            image: AssetImage('images/logo-transparent.png'),
-                            fit: BoxFit.scaleDown,
-                          )
-                        : Flag.fromString(
-                            global.city!.country.iso2,
-                          )),
+                  width: 36,
+                  height: 18,
+                  child: Image(
+                    image: buildCountryIcon(
+                        global.city != null ? global.city!.country : null),
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
                 const SizedBox(
                   width: 10,
                 ),
