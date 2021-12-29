@@ -38,8 +38,7 @@ function(APPLY_STANDARD_SETTINGS TARGET)
   target_compile_definitions(${TARGET} PRIVATE "$<$<CONFIG:Debug>:_DEBUG>")
 endfunction()
 
-set_property(TARGET ${BINARY_NAME} PROPERTY
-          LINK_FLAGS "/MANIFESTUAC:level='requireAdministrator'")
+
 
 set(FLUTTER_MANAGED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/flutter")
 
