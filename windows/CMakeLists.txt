@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(vpn LANGUAGES CXX)
 
-set(BINARY_NAME "vpn")
+set(BINARY_NAME "fastway")
 
 cmake_policy(SET CMP0063 NEW)
 
@@ -55,7 +55,9 @@ include(flutter/generated_plugins.cmake)
 # Support files are copied into place next to the executable, so that it can
 # run in place. This is done instead of making a separate bundle (as on Linux)
 # so that building and running from within Visual Studio will work.
-set(BUILD_BUNDLE_DIR "$<TARGET_FILE_DIR:${BINARY_NAME}>")
+# set(BUILD_BUNDLE_DIR "$<TARGET_FILE_DIR:${BINARY_NAME}>")
+
+set(BUILD_BUNDLE_DIR "${BINARY_NAME}")
 # Make the "install" step default, as it's required to run.
 set(CMAKE_VS_INCLUDE_INSTALL_TO_DEFAULT_BUILD 1)
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
