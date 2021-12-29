@@ -31,14 +31,15 @@ add_definitions(-DUNICODE -D_UNICODE)
 
 # Compilation settings that should be applied to most targets.
 function(APPLY_STANDARD_SETTINGS TARGET)
-  set_property(${TARGET} ${PROJECT_NAME} PROPERTY
-    LINK_FLAGS "/MANIFESTUAC:level='requireAdministrator'")
   target_compile_features(${TARGET} PUBLIC cxx_std_17)
   target_compile_options(${TARGET} PRIVATE /W4 /WX /wd"4100")
   target_compile_options(${TARGET} PRIVATE /EHsc)
   target_compile_definitions(${TARGET} PRIVATE "_HAS_EXCEPTIONS=0")
   target_compile_definitions(${TARGET} PRIVATE "$<$<CONFIG:Debug>:_DEBUG>")
 endfunction()
+
+set_property(TARGET ${BINARY_NAME} PROPERTY
+          LINK_FLAGS "/MANIFESTUAC:level='requireAdministrator'")
 
 set(FLUTTER_MANAGED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/flutter")
 
