@@ -92,10 +92,10 @@ BEGIN
             VALUE "CompanyName", "com.fy" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "vpn" "\0"
+            VALUE "InternalName", "Fastway" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2021 com.fy. All rights reserved." "\0"
-            VALUE "OriginalFilename", "vpn.exe" "\0"
-            VALUE "ProductName", "vpn" "\0"
+            VALUE "OriginalFilename", "fastway.exe" "\0"
+            VALUE "ProductName", "Fastway" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

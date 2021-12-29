@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(vpn LANGUAGES CXX)
+project(fastway LANGUAGES CXX)
 
 set(BINARY_NAME "fastway")
 
