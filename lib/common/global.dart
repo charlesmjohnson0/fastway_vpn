@@ -119,14 +119,14 @@ class Global {
       _device = jsonDecode(deviceStr);
     } else {
       try {
-        String deviceId = await _sdk.deviceId;
-
         if (Platform.isAndroid) {
+          String deviceId = await _sdk.deviceId;
           _device = {
             'deviceId': deviceId,
             'platform': DeviceType.android.index
           };
         } else if (Platform.isIOS) {
+          String deviceId = await _sdk.deviceId;
           _device = {'deviceId': deviceId, 'platform': DeviceType.iOS.index};
         } else if (Platform.isWindows) {
           _device = {

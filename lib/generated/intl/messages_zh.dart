@@ -88,7 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "support": MessageLookupByLibrary.simpleMessage("支持"),
         "sure_to_unbind": MessageLookupByLibrary.simpleMessage("确定要解绑吗?"),
         "terms_of_service": MessageLookupByLibrary.simpleMessage("服务条款"),
-        "title": MessageLookupByLibrary.simpleMessage("FastWay"),
+        "title": MessageLookupByLibrary.simpleMessage("FASTWAY"),
         "unable_access_internet":
             MessageLookupByLibrary.simpleMessage("无法连接互联网!请检查网络设置!"),
         "unbind_successfully": MessageLookupByLibrary.simpleMessage("解绑成功!"),
