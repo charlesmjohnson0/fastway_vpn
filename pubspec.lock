@@ -122,7 +122,7 @@ packages:
   fy_vpn_sdk:
     dependency: "direct main"
     description:
-      path: "../fy_vpn_sdk"
+      path: "../fastway_vpn_sdk"
       relative: true
     source: path
     version: "0.0.1"
