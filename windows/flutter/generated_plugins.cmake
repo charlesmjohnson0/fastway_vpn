@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   fy_vpn_sdk
   url_launcher_windows
+  window_manager
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)
