@@ -38,7 +38,7 @@ void main() async {
         // Use it only after calling `hiddenWindowAtLaunch`
         windowManager.waitUntilReadyToShow().then((_) async {
           // 隐藏窗口标题栏
-          await windowManager.setTitleBarStyle('hidden');
+          // await windowManager.setTitleBarStyle('hidden');
           await windowManager.setSize(const Size(420, 720));
           await windowManager.setPosition(const Offset(200, 100));
           await windowManager.show();
