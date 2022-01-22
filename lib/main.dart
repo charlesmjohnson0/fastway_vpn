@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:vpn/pages/splash/splash.dart';
+import 'package:fastway/pages/splash/splash.dart';
 import 'package:window_manager/window_manager.dart';
 import '/common/global.dart';
 import '/theme.dart';

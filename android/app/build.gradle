@@ -39,7 +39,7 @@ android {
 
     defaultConfig {
         // applicationId "com.fy.vpn"
-        applicationId "com.fastway.vpn"
+        applicationId "com.fastway.android"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
@@ -60,6 +60,11 @@ android {
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
             signingConfig signingConfigs.release
+
+            minifyEnabled true   
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+
         }
     }
     

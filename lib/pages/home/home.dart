@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:provider/provider.dart';
-import 'package:vpn/api/api_models.dart';
-import 'package:vpn/models/vpn_model.dart';
-import 'package:vpn/pages/exchange_code/exchange_code.dart';
+import 'package:fastway/api/api_models.dart';
+import 'package:fastway/models/vpn_model.dart';
+import 'package:fastway/pages/exchange_code/exchange_code.dart';
 
 import '/common/global.dart';
 import 'package:flutter/material.dart';

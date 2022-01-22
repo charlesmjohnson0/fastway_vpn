@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vpn/common/global.dart';
-import 'package:vpn/pages/error/error.dart';
-import 'package:vpn/pages/home/home.dart';
+import 'package:fastway/common/global.dart';
+import 'package:fastway/pages/error/error.dart';
+import 'package:fastway/pages/home/home.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

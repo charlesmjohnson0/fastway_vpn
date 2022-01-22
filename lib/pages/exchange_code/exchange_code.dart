@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vpn/api/api_models.dart';
-import 'package:vpn/common/global.dart';
+import 'package:fastway/api/api_models.dart';
+import 'package:fastway/common/global.dart';
 import '/generated/l10n.dart';
 import 'package:flutter/services.dart';
 
@@ -112,7 +112,7 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
 
   Widget buildUnBind(BuildContext context) {
     Clipboard.getData(Clipboard.kTextPlain).then((value) {
-      if (_isValidCode(value!.text)) {
+      if (value != null && _isValidCode(value.text)) {
         _codeController.text = value.text!;
         _validCode = true;
         setState(() {});
