@@ -156,7 +156,10 @@ class _SettingsState extends State<SettingsPage> {
                 ),
                 Text(global.copyrightInfo),
               ],
-            )
+            ),
+            const SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),

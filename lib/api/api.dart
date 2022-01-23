@@ -38,14 +38,14 @@ class Api {
   List<InterceptorsWrapper> requestInterceptors() {
     InterceptorsWrapper interceptorsWrapper =
         InterceptorsWrapper(onRequest: (options, handler) async {
-      debugPrint('request url : ${options.uri}');
-      debugPrint('request data : ${options.data}');
+      // debugPrint('request url : ${options.uri}');
+      // debugPrint('request data : ${options.data}');
 
       options.headers.putIfAbsent('DID', () => deviceId);
 
       handler.next(options);
     }, onResponse: (response, handler) {
-      debugPrint('response data : ${response.data}');
+      // debugPrint('response data : ${response.data}');
 
       handler.next(response);
     }, onError: (error, handler) {
@@ -61,7 +61,7 @@ class Api {
         default:
       }
 
-      debugPrint('process error : $error');
+      // debugPrint('process error : $error');
 
       handler.next(error);
     });

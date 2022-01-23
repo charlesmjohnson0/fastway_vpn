@@ -23,7 +23,7 @@ class Global {
   }
 
   String? _version;
-  String get versionInfo => _version ?? 'Version 2.0.1';
+  String get versionInfo => _version ?? 'Version 2.1.0';
   String? _copyright;
   String get copyrightInfo => _copyright ?? '';
 
@@ -156,6 +156,7 @@ class Global {
       required String versionInfo}) async {
     defaultApiBaseUrl = baseApiUrl;
     _copyright = copyrightInfo;
+    _version = versionInfo;
     SharedPreferences _prefs = await SharedPreferences.getInstance();
 
     await initPlatformState();

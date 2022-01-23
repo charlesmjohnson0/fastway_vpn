@@ -111,7 +111,9 @@ class _HomePageState extends State<HomePage> {
         ));
       });
 
-      vpnModel.getState().then((value) => _state = value);
+      vpnModel.getState().then((value) => setState(() {
+            _state = value;
+          }));
     });
   }
 

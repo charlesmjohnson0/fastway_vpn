@@ -16,7 +16,7 @@ import 'models/vpn_model.dart';
 const String defaultApiUrl = 'http://api.fastway.cloud';
 const int versionMajor = 2;
 const int versionMinor = 1;
-const int versionDevNo = 3344;
+const int versionDevNo = 0865;
 const String copyrightInfo = 'Copyright Fastway Inc. 2016-2022';
 const String title = 'Fastway';
 
