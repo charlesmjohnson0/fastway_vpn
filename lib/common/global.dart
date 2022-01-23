@@ -104,8 +104,7 @@ class Global {
   CityModel? _city;
   CityModel? get city => _city;
 
-  static const _chars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  static const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   final Random _rnd = Random();
 
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
@@ -120,28 +119,37 @@ class Global {
     } else {
       try {
         if (Platform.isAndroid) {
-          String deviceId = await _sdk.deviceId;
+          // String deviceId = await _sdk.deviceId;
+          // _device = {
+          //   'deviceId': deviceId,
+          //   'platform': DeviceType.android.index
+          // };
           _device = {
-            'deviceId': deviceId,
+            'deviceId': getRandomString(10) + '0${DeviceType.android.index}',
             'platform': DeviceType.android.index
           };
         } else if (Platform.isIOS) {
-          String deviceId = await _sdk.deviceId;
-          _device = {'deviceId': deviceId, 'platform': DeviceType.iOS.index};
+          // String deviceId = await _sdk.deviceId;
+          // _device = {'deviceId': deviceId, 'platform': DeviceType.iOS.index};
+
+          _device = {
+            'deviceId': getRandomString(10) + '0${DeviceType.iOS.index}',
+            'platform': DeviceType.iOS.index
+          };
         } else if (Platform.isWindows) {
           _device = {
-            'deviceId': getRandomString(24),
+            'deviceId': getRandomString(10) + '0${DeviceType.windows.index}',
             'platform': DeviceType.windows.index
           };
         } else if (Platform.isMacOS) {
           _device = {
-            'deviceId': getRandomString(16),
+            'deviceId': getRandomString(10) + '0${DeviceType.macOS.index}',
             'platform': DeviceType.macOS.index
           };
         }
       } on PlatformException {
         _device = {
-          'deviceId': getRandomString(14),
+          'deviceId': getRandomString(10) + '0${DeviceType.error.index}',
           'platform': DeviceType.error.index
         };
       }
