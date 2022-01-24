@@ -109,6 +109,9 @@ class _HomePageState extends State<HomePage> {
           content: Text(message),
           duration: const Duration(seconds: 3),
         ));
+
+        global.reportError('runtime error code : $event',
+            StackTrace.fromString('error : $event'));
       });
 
       vpnModel.getState().then((value) => setState(() {

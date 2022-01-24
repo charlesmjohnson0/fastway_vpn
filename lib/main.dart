@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import 'models/app_model.dart';
 import 'models/vpn_model.dart';
 
-const String defaultApiUrl = 'http://api.fastway.cloud';
+const String defaultApiUrl = 'https://api.fastway.cloud';
 const int versionMajor = 2;
 const int versionMinor = 1;
 const int versionDevNo = 0865;
