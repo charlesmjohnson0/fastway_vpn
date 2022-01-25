@@ -32,7 +32,7 @@ class _LanguageState extends State<LanguagePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).connection_mode),
+        title: Text(S.of(context).language),
       ),
       body: SafeArea(
           child: Column(
