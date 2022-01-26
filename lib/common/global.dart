@@ -195,6 +195,8 @@ class Global {
     //exchange code check
     await syncBindExchangeCode();
 
+    findNode();
+
     return 0;
   }
 
