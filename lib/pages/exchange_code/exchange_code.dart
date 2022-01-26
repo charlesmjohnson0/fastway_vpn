@@ -22,6 +22,7 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
     global.getExchangeCode().then((value) {
       exchangeCode = value;
       setState(() {});
+    }).then((value) {
       global.syncBindExchangeCode().then((value) {
         exchangeCode = value;
         setState(() {});
@@ -111,13 +112,13 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
   final TextEditingController _codeController = TextEditingController();
 
   Widget buildUnBind(BuildContext context) {
-    Clipboard.getData(Clipboard.kTextPlain).then((value) {
-      if (value != null && _isValidCode(value.text)) {
-        _codeController.text = value.text!;
-        _validCode = true;
-        setState(() {});
-      }
-    });
+    // Clipboard.getData(Clipboard.kTextPlain).then((value) {
+    //   if (value != null && _isValidCode(value.text)) {
+    //     _codeController.text = value.text!;
+    //     _validCode = true;
+    //     setState(() {});
+    //   }
+    // });
 
     return TextField(
       maxLines: 1,
