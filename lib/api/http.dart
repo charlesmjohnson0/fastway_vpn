@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio/adapter.dart';
 import 'package:flutter/material.dart';
 
 class Http {
@@ -64,6 +67,12 @@ class Http {
     _options.headers = Map<String, dynamic>.from(headers);
 
     Dio _dio = Dio(_options);
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
 
     _dio.interceptors.addAll(interceptorsWrappers!);
 

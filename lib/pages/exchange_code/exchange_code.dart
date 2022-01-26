@@ -231,11 +231,15 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
       child: AspectRatio(
         aspectRatio: 2 / 1,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              height: 24,
               alignment: const Alignment(1, 0),
               child: IconButton(
+                iconSize: 24,
+                padding: EdgeInsets.zero,
                 icon: const Icon(Icons.close),
                 onPressed: () {
                   showDialog(
@@ -339,6 +343,9 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),

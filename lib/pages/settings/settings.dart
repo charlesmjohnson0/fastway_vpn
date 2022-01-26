@@ -3,7 +3,7 @@ import 'package:fastway/api/api_models.dart';
 import '/common/global.dart';
 import 'package:flutter/material.dart';
 import '/generated/l10n.dart';
-import '/pages/settings/settings_connection_mode.dart';
+// import '/pages/settings/settings_connection_mode.dart';
 import '/pages/settings/settings_language.dart';
 // import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';

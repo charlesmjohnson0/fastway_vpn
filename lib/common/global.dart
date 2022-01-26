@@ -9,7 +9,6 @@ import '/api/api_models.dart';
 import '../models/vpn_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fy_vpn_sdk/fy_vpn_sdk.dart';
 
 enum DeviceType { android, iOS, windows, macOS, linux, error }
 
@@ -34,8 +33,6 @@ class Global {
   static const String _citiesKey = 'CITIES';
   static const String _baseUrlKey = 'BASE_URL';
   static const String _deviceKey = 'DEVICE';
-
-  final FyVpnSdk _sdk = FyVpnSdk();
 
   String? defaultApiBaseUrl;
 

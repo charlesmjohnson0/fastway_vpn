@@ -211,9 +211,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget countryItem(CountryModel country, List<CityModel> cities) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-      child: InkWell(
+    return InkWell(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -228,12 +228,17 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   width: 10,
                 ),
-                Text(
-                  country.fullName,
-                  style: const TextStyle(
-                    fontSize: 18,
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 300),
+                  child: Text(
+                    country.fullName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
             ((global.city == null && country.iso2.toLowerCase() == 'smart') ||
@@ -246,17 +251,17 @@ class _HomePageState extends State<HomePage> {
                 : const SizedBox(),
           ],
         ),
-        onTap: () {
-          if (cities[0].id == 0) {
-            global.changeLocation(null);
-          } else {
-            global.changeLocation(cities[0]);
-          }
-
-          setState(() {});
-          Navigator.of(context).pop();
-        },
       ),
+      onTap: () {
+        if (cities[0].id == 0) {
+          global.changeLocation(null);
+        } else {
+          global.changeLocation(cities[0]);
+        }
+
+        setState(() {});
+        Navigator.of(context).pop();
+      },
     );
 
     // return ListTile(
@@ -410,13 +415,17 @@ class _HomePageState extends State<HomePage> {
                 getStateText(),
               ],
             ),
-            Builder(
-              builder: (context) => HomeLocation(
-                onTap: () {
-                  showLocationList();
-                },
-              ),
-            )
+            Builder(builder: (context) {
+              return Container(
+                margin: const EdgeInsets.fromLTRB(60, 0, 60, 60),
+                height: 60,
+                child: HomeLocation(
+                  onTap: () {
+                    showLocationList();
+                  },
+                ),
+              );
+            })
           ],
         ),
       );
@@ -441,8 +450,7 @@ class _HomeLocationState extends State<HomeLocation> {
     return InkWell(
       onTap: widget.onTap,
       child: Container(
-        margin: const EdgeInsets.all(60),
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Theme.of(context).primaryColorLight),
@@ -452,31 +460,36 @@ class _HomeLocationState extends State<HomeLocation> {
           crossAxisAlignment: CrossAxisAlignment.center,
           verticalDirection: VerticalDirection.down,
           children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: 36,
-                  height: 18,
-                  child: Image(
-                    image: buildCountryIcon(
-                        global.city != null ? global.city!.country : null),
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
+            SizedBox(
+              width: 36,
+              height: 18,
+              child: Image(
+                image: buildCountryIcon(
+                    global.city != null ? global.city!.country : null),
+                fit: BoxFit.scaleDown,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 180),
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: Text(
                   global.city == null ? 'Smart' : global.city!.country.fullName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-              ],
+              ),
             ),
-            const Icon(
-              Icons.location_on_outlined,
+            const SizedBox(
+              // width: 36,
+              height: 18,
+              child: Icon(
+                Icons.location_on_outlined,
+              ),
             ),
           ],
         ),
