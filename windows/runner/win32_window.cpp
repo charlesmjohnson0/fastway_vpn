@@ -177,13 +177,11 @@ Win32Window::MessageHandler(HWND hwnd,
   switch (message)
   {
   case WM_CLOSE:
-    if (MessageBox(hwnd, "Are you sure to quit?", "Quit", MB_OKCANCEL | MB_ICONWARNING) == IDOK)
+    if (MessageBox(hwnd, L"Are you sure to quit?", L"Quit", MB_OKCANCEL | MB_ICONWARNING) == IDOK)
     {
       Destroy();
-
-      return 0;
     }
-    break;
+    return 0;
   case WM_DESTROY:
     window_handle_ = nullptr;
     if (quit_on_close_)
