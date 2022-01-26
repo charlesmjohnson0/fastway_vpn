@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:fastway/api/api_models.dart';
 import 'package:fastway/models/vpn_model.dart';
 
