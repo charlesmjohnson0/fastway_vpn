@@ -699,6 +699,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Out of memory!`
+  String get error_out_of_memory {
+    return Intl.message(
+      'Out of memory!',
+      name: 'error_out_of_memory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Internal error!`
+  String get error_internal {
+    return Intl.message(
+      'Internal error!',
+      name: 'error_internal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Node Offline!`
+  String get error_offline {
+    return Intl.message(
+      'Node Offline!',
+      name: 'error_offline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TLS error!`
+  String get error_tls {
+    return Intl.message(
+      'TLS error!',
+      name: 'error_tls',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NIC error!`
+  String get error_tun {
+    return Intl.message(
+      'NIC error!',
+      name: 'error_tun',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

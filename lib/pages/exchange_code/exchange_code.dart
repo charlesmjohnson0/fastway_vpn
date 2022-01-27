@@ -57,8 +57,9 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
             content: Text(S.of(context).verified_successfully),
             duration: const Duration(seconds: 2),
           ));
-          await Future.delayed(const Duration(seconds: 3));
-          Navigator.of(context).pop();
+          Future.delayed(const Duration(seconds: 3), () {
+            Navigator.of(context).pop();
+          });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).verification_failed),

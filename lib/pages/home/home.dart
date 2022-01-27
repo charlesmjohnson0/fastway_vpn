@@ -98,6 +98,21 @@ class _HomePageState extends State<HomePage> {
           case fy_error.fy_err_connection:
             message = S.of(context).connection_error;
             break;
+          case fy_error.fy_err_internel:
+            message = S.of(context).error_internal;
+            break;
+          case fy_error.fy_err_offline:
+            message = S.of(context).error_offline;
+            break;
+          case fy_error.fy_err_out_of_memory:
+            message = S.of(context).error_out_of_memory;
+            break;
+          case fy_error.fy_err_tls:
+            message = S.of(context).error_tls;
+            break;
+          case fy_error.fy_err_tun:
+            message = S.of(context).error_tun;
+            break;
           default:
             message = S.of(context).unknown_error;
             break;

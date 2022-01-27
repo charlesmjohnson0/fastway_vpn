@@ -63,5 +63,10 @@
   "retry": "重试",
   "retrying_pls_wait": "正在重试,请稍后...",
   "retry_failed": "重试失败!请检查网络设置!",
-  "success": "成功!"
+  "success": "成功!",
+  "error_out_of_memory": "内存不足!",
+  "error_internal": "内部错误!",
+  "error_offline": "节点已下线!",
+  "error_tls": "TLS 错误!",
+  "error_tun": "NIC 错误!"
 }

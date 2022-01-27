@@ -63,5 +63,10 @@
   "retry": "Retry",
   "retrying_pls_wait": "Retrying, please wait...",
   "retry_failed": "Retry failed! Please check network settings.",
-  "success": "Success!"
+  "success": "Success!",
+  "error_out_of_memory": "Out of memory!",
+  "error_internal":"Internal error!",
+  "error_offline":"Node Offline!",
+  "error_tls":"TLS error!",
+  "error_tun":"NIC error!"
 }

@@ -45,6 +45,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Disconnecting ..."),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "error_internal":
+            MessageLookupByLibrary.simpleMessage("Internal error!"),
+        "error_offline": MessageLookupByLibrary.simpleMessage("Node Offline!"),
+        "error_out_of_memory":
+            MessageLookupByLibrary.simpleMessage("Out of memory!"),
+        "error_tls": MessageLookupByLibrary.simpleMessage("TLS error!"),
+        "error_tun": MessageLookupByLibrary.simpleMessage("NIC error!"),
         "exchange_code": MessageLookupByLibrary.simpleMessage("Exchange Code"),
         "expired_day": MessageLookupByLibrary.simpleMessage("Expired (day)"),
         "expires_in_day":
