@@ -305,7 +305,7 @@ class _HomePageState extends State<HomePage> {
                   topRight: Radius.circular(10.0),
                 ),
               ),
-              height: MediaQuery.of(context).size.height / 2.0,
+              height: MediaQuery.of(context).size.height / 1.6,
               child: Column(
                 children: [
                   SizedBox(
@@ -341,7 +341,10 @@ class _HomePageState extends State<HomePage> {
                                 _countryMap.values.toList()[index];
 
                             return countryItem(country, cities);
-                          }))
+                          })),
+                  const SizedBox(
+                    height: 10,
+                  )
                 ],
               ));
         });
