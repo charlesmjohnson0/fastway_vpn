@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
             message = S.of(context).error_tun;
             break;
           default:
-            message = S.of(context).unknown_error;
+            message = S.of(context).unknown_error + " (${vpnModel.errorCode})";
             break;
         }
 
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
         ));
 
         global.reportError('runtime error code : $event',
-            StackTrace.fromString('error : $event'));
+            StackTrace.fromString('error : ${vpnModel.errorCode}'));
       });
 
       vpnModel.getState().then((value) => setState(() {

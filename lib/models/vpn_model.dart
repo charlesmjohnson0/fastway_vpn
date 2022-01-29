@@ -30,6 +30,8 @@ class VpnModel extends ChangeNotifier {
 
   Stream<fy_error> get onError => _sdk.onError;
 
+  int get errorCode => _sdk.errorCode;
+
   VpnProtocol get protocol => global.protocol;
 
   void changeProtocol(VpnProtocol protocol) {
@@ -74,6 +76,10 @@ class VpnModel extends ChangeNotifier {
       return;
     }
 
+    // var stateBak = getState();
+
+    _state = fy_state.CONNECTING;
+
     NodeModel? node = await global.findNode();
 
     if (node != null) {
@@ -112,6 +118,8 @@ class VpnModel extends ChangeNotifier {
 
       _sdk.startVpnService(protocolStr, node.domain ?? node.publicIP, port,
           username, password!, node.crt);
+    } else {
+      _state = fy_state.NONE;
     }
   }
 
