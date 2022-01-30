@@ -80,6 +80,8 @@ class VpnModel extends ChangeNotifier {
 
     _state = fy_state.CONNECTING;
 
+    notifyListeners();
+
     NodeModel? node = await global.findNode();
 
     if (node != null) {
@@ -120,6 +122,7 @@ class VpnModel extends ChangeNotifier {
           username, password!, node.crt);
     } else {
       _state = fy_state.NONE;
+      notifyListeners();
     }
   }
 

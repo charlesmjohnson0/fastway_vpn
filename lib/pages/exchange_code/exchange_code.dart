@@ -20,12 +20,14 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
     super.initState();
 
     global.getExchangeCode().then((value) {
-      exchangeCode = value;
-      setState(() {});
-    }).then((value) {
-      global.syncBindExchangeCode().then((value) {
+      setState(() {
         exchangeCode = value;
-        setState(() {});
+      });
+    });
+
+    global.syncBindExchangeCode().then((value) {
+      setState(() {
+        exchangeCode = value;
       });
     });
   }
@@ -57,9 +59,9 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
             content: Text(S.of(context).verified_successfully),
             duration: const Duration(seconds: 2),
           ));
-          Future.delayed(const Duration(seconds: 3), () {
-            Navigator.of(context).pop();
-          });
+          // Future.delayed(const Duration(seconds: 3), () {
+          //   Navigator.of(context).pop();
+          // });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).verification_failed),
@@ -83,8 +85,9 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
             duration: const Duration(seconds: 2),
           ));
 
-          exchangeCode = value;
-          setState(() {});
+          setState(() {
+            exchangeCode = value;
+          });
         });
       } else {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -113,13 +116,16 @@ class ExchangeCodePageState extends State<ExchangeCodePage> {
   final TextEditingController _codeController = TextEditingController();
 
   Widget buildUnBind(BuildContext context) {
-    // Clipboard.getData(Clipboard.kTextPlain).then((value) {
-    //   if (value != null && _isValidCode(value.text)) {
-    //     _codeController.text = value.text!;
-    //     _validCode = true;
-    //     setState(() {});
-    //   }
-    // });
+    if (_codeController.text.isEmpty) {
+      Clipboard.getData(Clipboard.kTextPlain).then((value) {
+        if (value != null && _isValidCode(value.text)) {
+          setState(() {
+            _codeController.text = value.text!;
+            _validCode = true;
+          });
+        }
+      });
+    }
 
     return TextField(
       maxLines: 1,
