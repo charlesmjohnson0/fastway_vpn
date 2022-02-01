@@ -33,7 +33,7 @@
   "ikev2_ipsec": "IKEv2(IPSec)",
   "ikev2_ipsec_description": "自动重连、强加密、稳定和快速的VPN协议",
   "english": "English",
-  "chinese": "中文",
+  "chinese": "中文(简体)",
   "share_text": "安全、稳定、快速的VPN服务",
   "share_subject": "FL",
   "location": "位置",

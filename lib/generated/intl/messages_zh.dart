@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "auto": MessageLookupByLibrary.simpleMessage("自动"),
         "auto_description": MessageLookupByLibrary.simpleMessage("自动选择合适的协议"),
         "change_location": MessageLookupByLibrary.simpleMessage("更改位置"),
-        "chinese": MessageLookupByLibrary.simpleMessage("中文"),
+        "chinese": MessageLookupByLibrary.simpleMessage("中文(简体)"),
         "configuring": MessageLookupByLibrary.simpleMessage("配置中..."),
         "connecting": MessageLookupByLibrary.simpleMessage("连接中..."),
         "connection_error": MessageLookupByLibrary.simpleMessage("连接错误!"),

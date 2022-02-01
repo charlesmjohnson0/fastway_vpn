@@ -52,7 +52,9 @@ class Api {
         case DioErrorType.connectTimeout:
         case DioErrorType.sendTimeout:
         case DioErrorType.receiveTimeout:
-          onErrorCallback!.call();
+          if (onErrorCallback != null) {
+            onErrorCallback!.call();
+          }
           break;
         case DioErrorType.response:
         case DioErrorType.other:

@@ -30,7 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Automatically select the appropriate protocol"),
         "change_location":
             MessageLookupByLibrary.simpleMessage("Change Location"),
-        "chinese": MessageLookupByLibrary.simpleMessage("中文"),
+        "chinese": MessageLookupByLibrary.simpleMessage("中文(简体)"),
         "configuring": MessageLookupByLibrary.simpleMessage("Configuring ..."),
         "connecting": MessageLookupByLibrary.simpleMessage("Connecting ..."),
         "connection_error":

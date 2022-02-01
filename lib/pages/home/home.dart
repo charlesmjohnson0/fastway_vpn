@@ -416,7 +416,11 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     global.isExchangeCodeValid.then((value) {
                       if (value) {
-                        vpnModel.toggle();
+                        vpnModel.toggle().then((value) {
+                          setState(() {
+                            _state = value;
+                          });
+                        });
                       } else {
                         Navigator.push(
                             context,

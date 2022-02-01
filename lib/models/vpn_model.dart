@@ -42,91 +42,87 @@ class VpnModel extends ChangeNotifier {
     global.changeLocation(city).then((value) => notifyListeners());
   }
 
-  Future<void> toggle() async {
-    _state = await getState();
-
-    debugPrint('toggle state : $_state');
-
-    switch (_state) {
-      case fy_state.AUTHENTICATING:
-      case fy_state.CONFIGURING:
-      case fy_state.CONNECTING:
-      case fy_state.ONLINE:
-        await disconnect();
-        break;
-      default:
-        await connect();
-    }
-
-    _state = await getState();
-
-    notifyListeners();
+  Future<fy_state> toggle() async {
+    return getState().then((state) {
+      _state = state;
+      switch (_state) {
+        case fy_state.AUTHENTICATING:
+        case fy_state.CONFIGURING:
+        case fy_state.CONNECTING:
+        case fy_state.ONLINE:
+          return disconnect();
+        default:
+          return connect();
+      }
+    });
   }
 
-  Future<void> connect() async {
+  Future<fy_state> connect() async {
     bool prepared = await _sdk.prepare();
 
     if (!prepared) {
-      return;
+      return getState();
     }
 
     prepared = await _sdk.prepared();
 
     if (!prepared) {
-      return;
+      return getState();
     }
 
     // var stateBak = getState();
 
     _state = fy_state.CONNECTING;
 
-    notifyListeners();
+    global.findNode().then((node) {
+      if (node != null) {
+        String protocolStr;
+        int port;
+        String username = global.userName;
+        String? password = global.password;
 
-    NodeModel? node = await global.findNode();
+        switch (global.protocol) {
+          case VpnProtocol.udp:
+            protocolStr = 'UDP';
+            port = node.fyUdpPort;
+            break;
 
-    if (node != null) {
-      String protocolStr;
-      int port;
-      String username = global.userName;
-      String? password = global.password;
+          case VpnProtocol.tcp:
+            protocolStr = 'TCP';
+            port = node.fyTcpPort;
+            break;
+          case VpnProtocol.tls:
+            protocolStr = 'TLS';
+            port = node.fyTlsPort;
+            break;
+          case VpnProtocol.auto:
+          case VpnProtocol.dtls:
+          default:
+            protocolStr = 'DTLS';
+            port = node.fyDtlsPort;
+            break;
+        }
 
-      switch (global.protocol) {
-        case VpnProtocol.udp:
-          protocolStr = 'UDP';
-          port = node.fyUdpPort;
-          break;
+        // debugPrint('Protocol  : $protocolStr');
+        // debugPrint('IP        : ${node.domain ?? node.publicIP}');
+        // debugPrint('PORT      : $port');
+        // debugPrint('username  : $username');
+        // debugPrint('password  : $password');
 
-        case VpnProtocol.tcp:
-          protocolStr = 'TCP';
-          port = node.fyTcpPort;
-          break;
-        case VpnProtocol.tls:
-          protocolStr = 'TLS';
-          port = node.fyTlsPort;
-          break;
-        case VpnProtocol.auto:
-        case VpnProtocol.dtls:
-        default:
-          protocolStr = 'DTLS';
-          port = node.fyDtlsPort;
-          break;
+        _sdk.startVpnService(protocolStr, node.domain ?? node.publicIP, port,
+            username, password!, node.crt);
+      } else {
+        _state = fy_state.NONE;
+        notifyListeners();
       }
+    });
 
-      // debugPrint('Protocol  : $protocolStr');
-      // debugPrint('IP        : ${node.domain ?? node.publicIP}');
-      // debugPrint('PORT      : $port');
-      // debugPrint('username  : $username');
-      // debugPrint('password  : $password');
-
-      _sdk.startVpnService(protocolStr, node.domain ?? node.publicIP, port,
-          username, password!, node.crt);
-    } else {
-      _state = fy_state.NONE;
-      notifyListeners();
-    }
+    return _state;
   }
 
-  Future<void> disconnect() async {
-    _sdk.stop();
+  Future<fy_state> disconnect() async {
+    await _sdk.stop();
+
+    return getState();
   }
 }

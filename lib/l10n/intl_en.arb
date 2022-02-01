@@ -33,7 +33,7 @@
   "ikev2_ipsec": "IKEv2(IPSec)",
   "ikev2_ipsec_description": "Auto-reconnect\\Strong encryption\\Stability and Speed VPN protocol",
   "english": "English",
-  "chinese": "中文",
+  "chinese": "中文(简体)",
   "share_text": "Secure stable fast vpn https://share.ftvpn.com",
   "share_subject": "subject",
   "location": "Location",

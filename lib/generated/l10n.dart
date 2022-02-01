@@ -390,10 +390,10 @@ class S {
     );
   }
 
-  /// `中文`
+  /// `中文(简体)`
   String get chinese {
     return Intl.message(
-      '中文',
+      '中文(简体)',
       name: 'chinese',
       desc: '',
       args: [],
