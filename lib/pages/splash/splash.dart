@@ -49,7 +49,7 @@ class SplashPageState extends State<SplashPage> {
       appBar: null,
       body: Center(
         child: Image(
-            image: AssetImage('images/logo-transparent.png'),
+            image: AssetImage('images/logo_transparent.png'),
             fit: BoxFit.scaleDown),
       ),
     );
