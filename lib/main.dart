@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fastway/pages/splash/splash.dart';
+import '/pages/splash/splash.dart';
 import 'package:window_manager/window_manager.dart';
 import '/common/global.dart';
 import '/theme.dart';
@@ -17,8 +17,8 @@ const String defaultApiUrl = 'https://api.fastway.cloud';
 const int versionMajor = 2;
 const int versionMinor = 1;
 const int versionDevNo = 0865;
-const String copyrightInfo = 'Copyright Fastway Inc. 2016-2022';
-const String title = 'Fastway';
+const String copyrightInfo = 'Copyright Quattro';
+const String title = 'Quattro';
 
 void main() async {
   var app = Global();
@@ -32,7 +32,6 @@ void main() async {
       WidgetsFlutterBinding.ensureInitialized();
 
       if (Platform.isWindows || Platform.isMacOS) {
-        // 必须加上这一行。
         await windowManager.ensureInitialized();
 
         // Use it only after calling `hiddenWindowAtLaunch`
@@ -62,7 +61,7 @@ void main() async {
             ChangeNotifierProvider(create: (context) => appModel),
             ChangeNotifierProvider(create: (context) => vpnModel),
           ],
-          child: const FastwayApp(),
+          child: const QuattroApp(),
         ));
       });
     },
@@ -80,8 +79,8 @@ class DesktopWindowListener extends WindowListener {
   void onWindowBlur() {}
 }
 
-class FastwayApp extends StatelessWidget {
-  const FastwayApp({Key? key}) : super(key: key);
+class QuattroApp extends StatelessWidget {
+  const QuattroApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

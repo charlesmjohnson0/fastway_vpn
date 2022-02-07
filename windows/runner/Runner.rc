@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "Fastway Inc." "\0"
-            VALUE "FileDescription", "Fastway" "\0"
+            VALUE "CompanyName", "Quattro Inc." "\0"
+            VALUE "FileDescription", "QuattroVPN" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "Fastway" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 Fastway Inc. All rights reserved." "\0"
-            VALUE "OriginalFilename", "fastway.exe" "\0"
-            VALUE "ProductName", "Fastway" "\0"
+            VALUE "InternalName", "QuattroVPN" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 Quattro Inc. All rights reserved." "\0"
+            VALUE "OriginalFilename", "quattroVPN.exe" "\0"
+            VALUE "ProductName", "QuattroVPN" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

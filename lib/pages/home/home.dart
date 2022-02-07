@@ -238,10 +238,11 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 Image(
-                  image: buildCountryIcon(country),
-                  fit: BoxFit.scaleDown,
-                  height: 18,
+                  alignment: Alignment.center,
                   width: 36,
+                  height: 18,
+                  image: buildCountryIcon(country),
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(
                   width: 10,
@@ -485,14 +486,13 @@ class _HomeLocationState extends State<HomeLocation> {
           crossAxisAlignment: CrossAxisAlignment.center,
           verticalDirection: VerticalDirection.down,
           children: [
-            SizedBox(
+            Image(
+              alignment: Alignment.center,
               width: 36,
               height: 18,
-              child: Image(
-                image: buildCountryIcon(
-                    global.city != null ? global.city!.country : null),
-                fit: BoxFit.scaleDown,
-              ),
+              image: buildCountryIcon(
+                  global.city != null ? global.city!.country : null),
+              fit: BoxFit.cover,
             ),
             Expanded(
               child: Container(

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fastway/common/global.dart';
-import 'package:fastway/pages/error/error.dart';
-import 'package:fastway/pages/home/home.dart';
+import '/common/global.dart';
+import '/pages/error/error.dart';
+import '/pages/home/home.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -49,8 +49,7 @@ class SplashPageState extends State<SplashPage> {
       appBar: null,
       body: Center(
         child: Image(
-            image: AssetImage('images/logo_transparent.png'),
-            fit: BoxFit.scaleDown),
+            image: AssetImage('images/logo_alpha.png'), fit: BoxFit.scaleDown),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fastway/api/api_models.dart';
-import 'package:fastway/common/global.dart';
+import '/api/api_models.dart';
+import '/common/global.dart';
 import '/generated/l10n.dart';
 import 'package:flutter/services.dart';
 

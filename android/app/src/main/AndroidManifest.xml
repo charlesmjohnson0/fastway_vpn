@@ -1,7 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.fastway.android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.quattro.android">
 
   <uses-permission android:name ="android.permission.INTERNET" />
-  <application android:label="Fastway" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round">
+  <application android:label="QuattroVPN" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round">
     <service android:name="com.fy.vpn.core.FyVpnService" android:enabled="true" android:exported="true" android:permission="android.permission.BIND_VPN_SERVICE">
     </service>
     <activity android:name="com.fy.vpn.MainActivity" android:exported="true" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">

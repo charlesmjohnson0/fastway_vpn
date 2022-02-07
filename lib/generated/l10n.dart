@@ -280,81 +280,81 @@ class S {
     );
   }
 
-  /// `Fastway Udp`
-  String get fastway_dtls {
+  /// `Quattro Udp`
+  String get quattro_dtls {
     return Intl.message(
-      'Fastway Udp',
-      name: 'fastway_dtls',
+      'Quattro Udp',
+      name: 'quattro_dtls',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission`
-  String get fastway_dtls_description {
+  /// `Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission`
+  String get quattro_dtls_description {
     return Intl.message(
-      'Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission',
-      name: 'fastway_dtls_description',
+      'Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission',
+      name: 'quattro_dtls_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fastway Tcp`
-  String get fastway_tls {
+  /// `Quattro Tcp`
+  String get quattro_tls {
     return Intl.message(
-      'Fastway Tcp',
-      name: 'fastway_tls',
+      'Quattro Tcp',
+      name: 'quattro_tls',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission`
-  String get fastway_tls_description {
+  /// `Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission`
+  String get quattro_tls_description {
     return Intl.message(
-      'Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission',
-      name: 'fastway_tls_description',
+      'Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission',
+      name: 'quattro_tls_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fastway Udp(Test)`
-  String get fastway_udp {
+  /// `Quattro Udp(Test)`
+  String get quattro_udp {
     return Intl.message(
-      'Fastway Udp(Test)',
-      name: 'fastway_udp',
+      'Quattro Udp(Test)',
+      name: 'quattro_udp',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission`
-  String get fastway_udp_description {
+  /// `Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission`
+  String get quattro_udp_description {
     return Intl.message(
-      'Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission',
-      name: 'fastway_udp_description',
+      'Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission',
+      name: 'quattro_udp_description',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fastway Tcp(Test)`
-  String get fastway_tcp {
+  /// `Quattro Tcp(Test)`
+  String get quattro_tcp {
     return Intl.message(
-      'Fastway Tcp(Test)',
-      name: 'fastway_tcp',
+      'Quattro Tcp(Test)',
+      name: 'quattro_tcp',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission`
-  String get fastway_tcp_description {
+  /// `Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission`
+  String get quattro_tcp_description {
     return Intl.message(
-      'Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission',
-      name: 'fastway_tcp_description',
+      'Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission',
+      name: 'quattro_tcp_description',
       desc: '',
       args: [],
     );

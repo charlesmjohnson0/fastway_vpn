@@ -47,20 +47,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "exchange_code": MessageLookupByLibrary.simpleMessage("兑换码"),
         "expired_day": MessageLookupByLibrary.simpleMessage("已过期(天)"),
         "expires_in_day": MessageLookupByLibrary.simpleMessage("剩余(天)"),
-        "fastway_dtls": MessageLookupByLibrary.simpleMessage("Fastway Udp"),
-        "fastway_dtls_description": MessageLookupByLibrary.simpleMessage(
-            "开创性VPN协议，更快、更安全、更可靠，基于DTLS传输"),
-        "fastway_tcp":
-            MessageLookupByLibrary.simpleMessage("Fastway Tcp(Test)"),
-        "fastway_tcp_description":
-            MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于TCP传输"),
-        "fastway_tls": MessageLookupByLibrary.simpleMessage("Fastway Tcp"),
-        "fastway_tls_description":
-            MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于TLS传输"),
-        "fastway_udp":
-            MessageLookupByLibrary.simpleMessage("Fastway Udp(Test)"),
-        "fastway_udp_description":
-            MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于UDP传输"),
         "ikev2_ipsec": MessageLookupByLibrary.simpleMessage("IKEv2(IPSec)"),
         "ikev2_ipsec_description":
             MessageLookupByLibrary.simpleMessage("自动重连、强加密、稳定和快速的VPN协议"),
@@ -79,6 +65,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "notice": MessageLookupByLibrary.simpleMessage("提示"),
         "online": MessageLookupByLibrary.simpleMessage("已连接"),
         "privacy_policy": MessageLookupByLibrary.simpleMessage("隐私政策"),
+        "quattro_dtls": MessageLookupByLibrary.simpleMessage("Quattro Udp"),
+        "quattro_dtls_description": MessageLookupByLibrary.simpleMessage(
+            "开创性VPN协议，更快、更安全、更可靠，基于DTLS传输"),
+        "quattro_tcp":
+            MessageLookupByLibrary.simpleMessage("Quattro Tcp(Test)"),
+        "quattro_tcp_description":
+            MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于TCP传输"),
+        "quattro_tls": MessageLookupByLibrary.simpleMessage("Quattro Tcp"),
+        "quattro_tls_description":
+            MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于TLS传输"),
+        "quattro_udp":
+            MessageLookupByLibrary.simpleMessage("Quattro Udp(Test)"),
+        "quattro_udp_description":
+            MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于UDP传输"),
         "remove": MessageLookupByLibrary.simpleMessage("移除"),
         "retry": MessageLookupByLibrary.simpleMessage("重试"),
         "retry_failed": MessageLookupByLibrary.simpleMessage("重试失败!请检查网络设置!"),
@@ -93,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "support": MessageLookupByLibrary.simpleMessage("支持"),
         "sure_to_unbind": MessageLookupByLibrary.simpleMessage("确定要解绑吗?"),
         "terms_of_service": MessageLookupByLibrary.simpleMessage("服务条款"),
-        "title": MessageLookupByLibrary.simpleMessage("FASTWAY"),
+        "title": MessageLookupByLibrary.simpleMessage("QUATTRO"),
         "unable_access_internet":
             MessageLookupByLibrary.simpleMessage("无法连接互联网!请检查网络设置!"),
         "unbind_successfully": MessageLookupByLibrary.simpleMessage("解绑成功!"),

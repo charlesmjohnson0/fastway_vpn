@@ -1,4 +1,4 @@
-import 'package:fastway/api/api_models.dart';
+import '/api/api_models.dart';
 
 import '/common/global.dart';
 import 'package:flutter/material.dart';
