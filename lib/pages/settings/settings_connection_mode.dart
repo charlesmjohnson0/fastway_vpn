@@ -26,16 +26,16 @@ class _ConnectionModeState extends State<ConnectionModePage> {
 
     protocols.add(VpnProtocolModel(
         S.of(context).auto, S.of(context).auto_description, VpnProtocol.auto));
-    protocols.add(VpnProtocolModel(S.of(context).fastway_udp,
-        S.of(context).fastway_udp_description, VpnProtocol.udp));
+    protocols.add(VpnProtocolModel(S.of(context).quattro_udp,
+        S.of(context).quattro_udp_description, VpnProtocol.udp));
 
-    protocols.add(VpnProtocolModel(S.of(context).fastway_tcp,
-        S.of(context).fastway_tcp_description, VpnProtocol.tcp));
+    protocols.add(VpnProtocolModel(S.of(context).quattro_tcp,
+        S.of(context).quattro_tcp_description, VpnProtocol.tcp));
 
-    protocols.add(VpnProtocolModel(S.of(context).fastway_dtls,
-        S.of(context).fastway_dtls_description, VpnProtocol.dtls));
-    protocols.add(VpnProtocolModel(S.of(context).fastway_tls,
-        S.of(context).fastway_tls_description, VpnProtocol.tls));
+    protocols.add(VpnProtocolModel(S.of(context).quattro_dtls,
+        S.of(context).quattro_dtls_description, VpnProtocol.dtls));
+    protocols.add(VpnProtocolModel(S.of(context).quattro_tls,
+        S.of(context).quattro_tls_description, VpnProtocol.tls));
   }
 
   @override

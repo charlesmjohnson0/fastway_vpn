@@ -29,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(200, 100);
   Win32Window::Size size(420, 720);
-  if (!window.CreateAndShow(L"Fastway", origin, size))
+  if (!window.CreateAndShow(L"QuattroVPN", origin, size))
   {
     return EXIT_FAILURE;
   }

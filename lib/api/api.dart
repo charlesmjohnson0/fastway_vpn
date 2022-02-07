@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:fastway/api/api_models.dart';
-import 'package:fastway/models/vpn_model.dart';
+import '/api/api_models.dart';
+import '/models/vpn_model.dart';
 
 import 'http.dart';
 

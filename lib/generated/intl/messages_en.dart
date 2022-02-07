@@ -56,20 +56,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired_day": MessageLookupByLibrary.simpleMessage("Expired (day)"),
         "expires_in_day":
             MessageLookupByLibrary.simpleMessage("Expires in(day)"),
-        "fastway_dtls": MessageLookupByLibrary.simpleMessage("Fastway Udp"),
-        "fastway_dtls_description": MessageLookupByLibrary.simpleMessage(
-            "Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission"),
-        "fastway_tcp":
-            MessageLookupByLibrary.simpleMessage("Fastway Tcp(Test)"),
-        "fastway_tcp_description": MessageLookupByLibrary.simpleMessage(
-            "Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission"),
-        "fastway_tls": MessageLookupByLibrary.simpleMessage("Fastway Tcp"),
-        "fastway_tls_description": MessageLookupByLibrary.simpleMessage(
-            "Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission"),
-        "fastway_udp":
-            MessageLookupByLibrary.simpleMessage("Fastway Udp(Test)"),
-        "fastway_udp_description": MessageLookupByLibrary.simpleMessage(
-            "Fastway is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission"),
         "ikev2_ipsec": MessageLookupByLibrary.simpleMessage("IKEv2(IPSec)"),
         "ikev2_ipsec_description": MessageLookupByLibrary.simpleMessage(
             "Auto-reconnect\\Strong encryption\\Stability and Speed VPN protocol"),
@@ -89,6 +75,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "online": MessageLookupByLibrary.simpleMessage("Connected"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "quattro_dtls": MessageLookupByLibrary.simpleMessage("Quattro Udp"),
+        "quattro_dtls_description": MessageLookupByLibrary.simpleMessage(
+            "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission"),
+        "quattro_tcp":
+            MessageLookupByLibrary.simpleMessage("Quattro Tcp(Test)"),
+        "quattro_tcp_description": MessageLookupByLibrary.simpleMessage(
+            "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission"),
+        "quattro_tls": MessageLookupByLibrary.simpleMessage("Quattro Tcp"),
+        "quattro_tls_description": MessageLookupByLibrary.simpleMessage(
+            "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission"),
+        "quattro_udp":
+            MessageLookupByLibrary.simpleMessage("Quattro Udp(Test)"),
+        "quattro_udp_description": MessageLookupByLibrary.simpleMessage(
+            "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission"),
         "remove": MessageLookupByLibrary.simpleMessage("remove"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "retry_failed": MessageLookupByLibrary.simpleMessage(

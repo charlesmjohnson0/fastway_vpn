@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fastway/common/global.dart';
+import '/common/global.dart';
 
 class BaseResponse<T> {
   BaseResponse({required this.code, this.result, this.msg, this.error});

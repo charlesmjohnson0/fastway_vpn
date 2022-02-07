@@ -150,9 +150,11 @@ packages:
   fy_vpn_sdk:
     dependency: "direct main"
     description:
-      path: "../fastway_vpn_sdk"
-      relative: true
-    source: path
+      path: "."
+      ref: master
+      resolved-ref: "8783ef50d3f6ff077a8fc4cc86b0085f3cbb58f2"
+      url: "https://github.com/charlesmjohnson0/fastway_vpn_sdk"
+    source: git
     version: "0.0.1"
   http_parser:
     dependency: transitive

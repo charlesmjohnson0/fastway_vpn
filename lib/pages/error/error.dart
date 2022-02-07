@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fastway/common/global.dart';
-import 'package:fastway/generated/l10n.dart';
-import 'package:fastway/pages/home/home.dart';
+import '/common/global.dart';
+import '/generated/l10n.dart';
+import '/pages/home/home.dart';
 
 class ErrorPage extends StatefulWidget {
   const ErrorPage({Key? key}) : super(key: key);

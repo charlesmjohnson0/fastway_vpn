@@ -39,7 +39,7 @@ android {
 
     defaultConfig {
         // applicationId "com.fy.vpn"
-        applicationId "com.fastway.android"
+        applicationId "com.quattro.android"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
