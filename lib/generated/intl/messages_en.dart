@@ -75,18 +75,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "online": MessageLookupByLibrary.simpleMessage("Connected"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
-        "quattro_dtls": MessageLookupByLibrary.simpleMessage("Quattro Udp"),
+        "quattro_dtls": MessageLookupByLibrary.simpleMessage("DTLS"),
         "quattro_dtls_description": MessageLookupByLibrary.simpleMessage(
             "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission"),
-        "quattro_tcp":
-            MessageLookupByLibrary.simpleMessage("Quattro Tcp(Test)"),
+        "quattro_tcp": MessageLookupByLibrary.simpleMessage("TCP"),
         "quattro_tcp_description": MessageLookupByLibrary.simpleMessage(
             "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission"),
-        "quattro_tls": MessageLookupByLibrary.simpleMessage("Quattro Tcp"),
+        "quattro_tls": MessageLookupByLibrary.simpleMessage("TLS"),
         "quattro_tls_description": MessageLookupByLibrary.simpleMessage(
             "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on TCP transmission"),
-        "quattro_udp":
-            MessageLookupByLibrary.simpleMessage("Quattro Udp(Test)"),
+        "quattro_udp": MessageLookupByLibrary.simpleMessage("UDP"),
         "quattro_udp_description": MessageLookupByLibrary.simpleMessage(
             "Quattro is pioneering new VPN protocol, built for an always-on world. It makes your VPN experience speedier, more secure, and more reliable than ever，Based on UDP transmission"),
         "remove": MessageLookupByLibrary.simpleMessage("remove"),

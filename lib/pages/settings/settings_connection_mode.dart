@@ -26,11 +26,11 @@ class _ConnectionModeState extends State<ConnectionModePage> {
 
     protocols.add(VpnProtocolModel(
         S.of(context).auto, S.of(context).auto_description, VpnProtocol.auto));
-    protocols.add(VpnProtocolModel(S.of(context).quattro_udp,
-        S.of(context).quattro_udp_description, VpnProtocol.udp));
+    // protocols.add(VpnProtocolModel(S.of(context).quattro_udp,
+    //     S.of(context).quattro_udp_description, VpnProtocol.udp));
 
-    protocols.add(VpnProtocolModel(S.of(context).quattro_tcp,
-        S.of(context).quattro_tcp_description, VpnProtocol.tcp));
+    // protocols.add(VpnProtocolModel(S.of(context).quattro_tcp,
+    //     S.of(context).quattro_tcp_description, VpnProtocol.tcp));
 
     protocols.add(VpnProtocolModel(S.of(context).quattro_dtls,
         S.of(context).quattro_dtls_description, VpnProtocol.dtls));
@@ -65,7 +65,7 @@ class _ConnectionModeState extends State<ConnectionModePage> {
                       final protocol = protocols[index];
                       return ListTile(
                         title: Text(protocol.name),
-                        subtitle: Text(protocol.description),
+                        // subtitle: Text(protocol.description),
                         trailing: null,
                         selected: Provider.of<VpnModel>(context, listen: false)
                                 .protocol ==
