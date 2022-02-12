@@ -280,10 +280,10 @@ class S {
     );
   }
 
-  /// `Quattro Udp`
+  /// `DTLS`
   String get quattro_dtls {
     return Intl.message(
-      'Quattro Udp',
+      'DTLS',
       name: 'quattro_dtls',
       desc: '',
       args: [],
@@ -300,10 +300,10 @@ class S {
     );
   }
 
-  /// `Quattro Tcp`
+  /// `TLS`
   String get quattro_tls {
     return Intl.message(
-      'Quattro Tcp',
+      'TLS',
       name: 'quattro_tls',
       desc: '',
       args: [],
@@ -320,10 +320,10 @@ class S {
     );
   }
 
-  /// `Quattro Udp(Test)`
+  /// `UDP`
   String get quattro_udp {
     return Intl.message(
-      'Quattro Udp(Test)',
+      'UDP',
       name: 'quattro_udp',
       desc: '',
       args: [],
@@ -340,10 +340,10 @@ class S {
     );
   }
 
-  /// `Quattro Tcp(Test)`
+  /// `TCP`
   String get quattro_tcp {
     return Intl.message(
-      'Quattro Tcp(Test)',
+      'TCP',
       name: 'quattro_tcp',
       desc: '',
       args: [],

@@ -65,18 +65,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "notice": MessageLookupByLibrary.simpleMessage("提示"),
         "online": MessageLookupByLibrary.simpleMessage("已连接"),
         "privacy_policy": MessageLookupByLibrary.simpleMessage("隐私政策"),
-        "quattro_dtls": MessageLookupByLibrary.simpleMessage("Quattro Udp"),
+        "quattro_dtls": MessageLookupByLibrary.simpleMessage("DTLS"),
         "quattro_dtls_description": MessageLookupByLibrary.simpleMessage(
             "开创性VPN协议，更快、更安全、更可靠，基于DTLS传输"),
-        "quattro_tcp":
-            MessageLookupByLibrary.simpleMessage("Quattro Tcp(Test)"),
+        "quattro_tcp": MessageLookupByLibrary.simpleMessage("TCP"),
         "quattro_tcp_description":
             MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于TCP传输"),
-        "quattro_tls": MessageLookupByLibrary.simpleMessage("Quattro Tcp"),
+        "quattro_tls": MessageLookupByLibrary.simpleMessage("TLS"),
         "quattro_tls_description":
             MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于TLS传输"),
-        "quattro_udp":
-            MessageLookupByLibrary.simpleMessage("Quattro Udp(Test)"),
+        "quattro_udp": MessageLookupByLibrary.simpleMessage("UDP"),
         "quattro_udp_description":
             MessageLookupByLibrary.simpleMessage("开创性VPN协议，更快、更安全、更可靠，基于UDP传输"),
         "remove": MessageLookupByLibrary.simpleMessage("移除"),
