@@ -48,10 +48,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   fy_vpn_sdk:
-    git:
-      url: https://github.com/charlesmjohnson0/fastway_vpn_sdk
-      ref: master
-    # path: ../fastway_vpn_sdk/
+    # git:
+    #   url: https://github.com/charlesmjohnson0/fastway_vpn_sdk
+    #   ref: master
+    path: ./fastway_vpn_sdk/
     # flutter_vpn: ^0.10.1
 
 dev_dependencies:

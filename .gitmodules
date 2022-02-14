@@ -1,0 +1,3 @@
+[submodule "fastway_vpn_sdk"]
+	path = fastway_vpn_sdk
+	url = https://github.com/charlesmjohnson0/fastway_vpn_sdk
